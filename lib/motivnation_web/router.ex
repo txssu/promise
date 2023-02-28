@@ -12,12 +12,24 @@ defmodule MotivNationWeb.Router do
 
   pipeline :api do
     plug :accepts, ["json"]
+    plug OpenApiSpex.Plug.PutApiSpec, module: MotivNationWeb.ApiSpec
   end
 
   scope "/", MotivNationWeb do
     pipe_through :browser
 
     get "/", PageController, :home
+  end
+
+  scope "/" do
+    pipe_through :browser
+
+    get "/swaggerui", OpenApiSpex.Plug.SwaggerUI, path: "/api/openapi"
+  end
+
+  scope "/api" do
+    pipe_through :api
+    get "/openapi", OpenApiSpex.Plug.RenderSpec, []
   end
 
   # Other scopes may use custom stacks.
