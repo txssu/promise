@@ -2,6 +2,7 @@
 ## Before
 - [x] Add Credo and Dialyxir
 - [x] Add OpenAPI spec library
+- [x] Fix possible Credo warnings
 - [ ] Add auth
     - [ ] Add users table
     - [ ] Add Guardian module

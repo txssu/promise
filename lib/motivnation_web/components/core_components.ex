@@ -11,7 +11,9 @@ defmodule MotivNationWeb.CoreComponents do
   """
   use Phoenix.Component
 
+  alias Phoenix.HTML.Form
   alias Phoenix.LiveView.JS
+
   import MotivNationWeb.Gettext
 
   @doc """
@@ -312,7 +314,7 @@ defmodule MotivNationWeb.CoreComponents do
 
   def input(%{type: "checkbox", value: value} = assigns) do
     assigns =
-      assign_new(assigns, :checked, fn -> Phoenix.HTML.Form.normalize_value("checkbox", value) end)
+      assign_new(assigns, :checked, fn -> Form.normalize_value("checkbox", value) end)
 
     ~H"""
     <div phx-feedback-for={@name}>
@@ -346,7 +348,7 @@ defmodule MotivNationWeb.CoreComponents do
         {@rest}
       >
         <option :if={@prompt} value=""><%= @prompt %></option>
-        <%= Phoenix.HTML.Form.options_for_select(@options, @value) %>
+        <%= Form.options_for_select(@options, @value) %>
       </select>
       <.error :for={msg <- @errors}><%= msg %></.error>
     </div>
@@ -368,7 +370,7 @@ defmodule MotivNationWeb.CoreComponents do
           @errors != [] && "border-rose-400 focus:border-rose-400 focus:ring-rose-400/10"
         ]}
         {@rest}
-      ><%= Phoenix.HTML.Form.normalize_value("textarea", @value) %></textarea>
+      ><%= Form.normalize_value("textarea", @value) %></textarea>
       <.error :for={msg <- @errors}><%= msg %></.error>
     </div>
     """
@@ -382,7 +384,7 @@ defmodule MotivNationWeb.CoreComponents do
         type={@type}
         name={@name}
         id={@id || @name}
-        value={Phoenix.HTML.Form.normalize_value(@type, @value)}
+        value={Form.normalize_value(@type, @value)}
         class={[
           "mt-2 block w-full rounded-lg border-zinc-300 py-[7px] px-[11px]",
           "text-zinc-900 focus:outline-none focus:ring-4 sm:text-sm sm:leading-6",

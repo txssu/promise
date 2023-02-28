@@ -1,4 +1,5 @@
 defmodule MotivNationWeb.ErrorHTML do
+  @moduledoc false
   use MotivNationWeb, :html
 
   # If you want to customize your error pages,
