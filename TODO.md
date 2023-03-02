@@ -5,6 +5,6 @@
 - [x] Fix possible Credo warnings
 - [ ] Add auth
     - [x] Add users table
-    - [ ] Add Guardian module
+    - [x] Add Guardian module
     - [ ] Edit users paths according to auth
     - [ ] Add docs to paths
