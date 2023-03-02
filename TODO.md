@@ -8,3 +8,4 @@
     - [x] Add Guardian module
     - [ ] Edit users paths according to auth
     - [ ] Add docs to paths
+    - [ ] Add token revoking
