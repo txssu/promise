@@ -32,6 +32,12 @@ defmodule MotivNationWeb.Router do
     get "/openapi", OpenApiSpex.Plug.RenderSpec, []
   end
 
+  scope "/api/tokens", MotivNationWeb do
+    pipe_through :api
+
+    post "/", TokenController, :create
+  end
+
   # Other scopes may use custom stacks.
   # scope "/api", MotivNationWeb do
   #   pipe_through :api

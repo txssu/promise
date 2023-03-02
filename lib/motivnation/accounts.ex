@@ -41,6 +41,16 @@ defmodule MotivNation.Accounts do
     Repo.get_by(User, email: email)
   end
 
+  def get_user_by_email_and_password(email, password) do
+    user = get_user_by_email(email)
+
+    if Argon2.check_pass(user, password) do
+      {:ok, user}
+    else
+      :error
+    end
+  end
+
   @doc """
   Creates a user.
 
