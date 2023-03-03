@@ -20,5 +20,6 @@ defmodule MotivNationWeb.ApiSpec do
         securitySchemes: %{"authorization" => %SecurityScheme{type: "http", scheme: "bearer"}}
       }
     }
+    |> OpenApiSpex.resolve_schema_modules()
   end
 end

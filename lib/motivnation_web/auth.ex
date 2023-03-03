@@ -13,7 +13,6 @@ defmodule MotivNationWeb.Auth do
   end
 
   def fetch_current_user(conn, _opts) do
-    IO.inspect(conn)
     with {:get_auth, [auth_data]} <- {:get_auth, get_req_header(conn, "authorization")},
          {:fetch_token, {:ok, token}} <- {:fetch_token, fetch_token(auth_data)},
          {:fetch_claims, {:ok, %{"sub" => user_id}}} <-

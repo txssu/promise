@@ -45,6 +45,8 @@ defmodule MotivNationWeb do
       import Plug.Conn
       import MotivNationWeb.Gettext
 
+      alias MotivNationWeb.Schemas
+
       unquote(verified_routes())
     end
   end
@@ -101,6 +103,13 @@ defmodule MotivNationWeb do
         endpoint: MotivNationWeb.Endpoint,
         router: MotivNationWeb.Router,
         statics: MotivNationWeb.static_paths()
+    end
+  end
+
+  def openapi_schema do
+    quote do
+      alias OpenApiSpex.Schema
+      require OpenApiSpex
     end
   end
 

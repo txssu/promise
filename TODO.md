@@ -11,5 +11,5 @@
         - [x] Add auth plug to user's `put` and `delete`
         - [x] Move user's `put` and `delete` over auth plug
     - [x] Enable CORS
-    - [ ] Add docs for paths
+    - [x] Add docs for paths
     - [ ] Add token revoking
