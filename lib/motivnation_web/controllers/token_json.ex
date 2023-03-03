@@ -1,4 +1,5 @@
 defmodule MotivNationWeb.TokenJSON do
+  @moduledoc false
   @doc """
   Renders a single user.
   """

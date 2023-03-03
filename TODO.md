@@ -6,9 +6,9 @@
 - [ ] Add auth
     - [x] Add users table
     - [x] Add Guardian module
-    - [ ] Edit users paths according to auth
+    - [x] Edit users paths according to auth
         - [x] Add `/api/tokens/` for token creation
-        - [ ] Add auth plug to user's `put` and `delete`
-        - [ ] Move user's `put` and `delete` over auth plug
-    - [ ] Add docs to paths
+        - [x] Add auth plug to user's `put` and `delete`
+        - [x] Move user's `put` and `delete` over auth plug
+    - [ ] Add docs for paths
     - [ ] Add token revoking

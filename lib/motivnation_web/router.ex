@@ -1,6 +1,8 @@
 defmodule MotivNationWeb.Router do
   use MotivNationWeb, :router
 
+  import MotivNationWeb.Auth
+
   pipeline :browser do
     plug :accepts, ["html"]
     plug :fetch_session
@@ -13,6 +15,7 @@ defmodule MotivNationWeb.Router do
   pipeline :api do
     plug :accepts, ["json"]
     plug OpenApiSpex.Plug.PutApiSpec, module: MotivNationWeb.ApiSpec
+    plug :fetch_current_user
   end
 
   scope "/", MotivNationWeb do
@@ -36,6 +39,22 @@ defmodule MotivNationWeb.Router do
     pipe_through :api
 
     post "/", TokenController, :create
+  end
+
+  scope "/api/users", MotivNationWeb do
+    pipe_through :api
+
+    get "/", UserController, :index
+    post "/", UserController, :create
+
+    get "/:id", UserController, :show
+  end
+
+  scope "/api/users", MotivNationWeb do
+    pipe_through [:api, :ensure_authorized]
+
+    put "/:id", UserController, :update
+    delete "/:id", UserController, :delete
   end
 
   # Other scopes may use custom stacks.

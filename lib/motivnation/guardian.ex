@@ -1,4 +1,5 @@
 defmodule MotivNation.Guardian do
+  @moduledoc false
   use Guardian, otp_app: :motivnation
 
   def subject_for_token(%{id: id}, _claims) do

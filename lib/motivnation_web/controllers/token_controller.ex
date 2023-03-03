@@ -1,9 +1,9 @@
 defmodule MotivNationWeb.TokenController do
   use MotivNationWeb, :controller
 
-  alias MotivNation.Guardian
   alias MotivNation.Accounts
   alias MotivNation.Accounts.User
+  alias MotivNation.Guardian
 
   action_fallback MotivNationWeb.FallbackController
 

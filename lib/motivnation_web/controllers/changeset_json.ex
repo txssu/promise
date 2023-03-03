@@ -1,4 +1,5 @@
 defmodule MotivNationWeb.ChangesetJSON do
+  @moduledoc false
   @doc """
   Renders changeset errors.
   """
