@@ -13,3 +13,4 @@
     - [x] Enable CORS
     - [x] Add docs for paths
     - [ ] Add token revoking
+- [ ] Add dockerfile and docker-compose
