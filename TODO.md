@@ -16,5 +16,5 @@
         - [x] Add GuardianDB
         - [x] Add path for token revoking
     - [x] Use build in guardian plugs
-- [ ] Use SecretVault for storing secrets
+- [x] Use SecretVault for storing secrets
 - [ ] Add dockerfile and docker-compose
