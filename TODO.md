@@ -3,7 +3,7 @@
 - [x] Add Credo and Dialyxir
 - [x] Add OpenAPI spec library
 - [x] Fix possible Credo warnings
-- [ ] Add auth
+- [x] Add auth
     - [x] Add users table
     - [x] Add Guardian module
     - [x] Edit users paths according to auth
@@ -15,6 +15,6 @@
     - [x] Add token revoking
         - [x] Add GuardianDB
         - [x] Add path for token revoking
-    - [ ] Use build in guardian plugs
+    - [x] Use build in guardian plugs
 - [ ] Use SecretVault for storing secrets
 - [ ] Add dockerfile and docker-compose

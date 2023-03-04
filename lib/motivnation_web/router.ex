@@ -1,21 +1,21 @@
 defmodule MotivNationWeb.Router do
   use MotivNationWeb, :router
 
-  import MotivNationWeb.Auth
-
   pipeline :browser do
     plug :accepts, ["html"]
     plug :fetch_session
     plug :fetch_live_flash
     plug :put_root_layout, {MotivNationWeb.Layouts, :root}
     plug :protect_from_forgery
-    plug :put_secure_browser_headers
   end
 
   pipeline :api do
     plug :accepts, ["json"]
     plug OpenApiSpex.Plug.PutApiSpec, module: MotivNationWeb.ApiSpec
-    plug :fetch_current_user
+  end
+
+  pipeline :ensure_authorized do
+    plug MotivNationWeb.AuthPipeline
   end
 
   scope "/", MotivNationWeb do
@@ -39,11 +39,6 @@ defmodule MotivNationWeb.Router do
     pipe_through :api
 
     post "/", TokenController, :create
-  end
-
-  scope "/api/tokens", MotivNationWeb do
-    pipe_through [:api, :ensure_authorized]
-
     delete "/:token", TokenController, :delete
   end
 
