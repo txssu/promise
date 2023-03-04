@@ -13,5 +13,7 @@
     - [x] Enable CORS
     - [x] Add docs for paths
     - [ ] Add token revoking
+        - [x] Add GuardianDB
+        - [ ] Add path to get 
 - [ ] Use SecretVault for storing secrets
 - [ ] Add dockerfile and docker-compose

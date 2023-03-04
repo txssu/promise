@@ -55,6 +55,7 @@ defmodule MotivNation.MixProject do
       {:open_api_spex, "~> 3.16"},
       {:argon2_elixir, "~> 3.0"},
       {:cors_plug, "~> 3.0"},
+      {:guardian_db, "~> 2.0"},
       {:credo, "~> 1.6", only: [:dev, :test], runtime: false},
       {:dialyxir, "~> 1.0", only: [:dev], runtime: false}
     ]

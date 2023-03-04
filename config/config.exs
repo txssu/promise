@@ -66,6 +66,12 @@ config :motivnation, MotivNation.Guardian,
   issuer: "motivnation",
   secret_key: "Secret key. You can use `mix guardian.gen.secret` to get one"
 
+# GuardianDB config
+config :guardian, Guardian.DB,
+  repo: MotivNation.Repo, # Add your repository module
+  schema_name: "guardian_tokens", # default
+  sweep_interval: 60 # default: 60 minutes
+
 # Import environment specific config. This must remain at the bottom
 # of this file so it overrides the configuration defined above.
 import_config "#{config_env()}.exs"

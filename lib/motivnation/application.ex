@@ -17,9 +17,10 @@ defmodule MotivNation.Application do
       # Start Finch
       {Finch, name: MotivNation.Finch},
       # Start the Endpoint (http/https)
-      MotivNationWeb.Endpoint
+      MotivNationWeb.Endpoint,
       # Start a worker by calling: MotivNation.Worker.start_link(arg)
       # {MotivNation.Worker, arg}
+      {Guardian.DB.Token.SweeperServer, []}
     ]
 
     # See https://hexdocs.pm/elixir/Supervisor.html
