@@ -21,33 +21,13 @@ defmodule MotivNationWeb.TokenController do
     request_body: {"User params", "application/json", Schemas.UserAuthData},
     responses: [
       ok: {"Token and user id", "application/json", Schemas.TokenResponse},
-      unauthorized:
-        {"Possibly wrong email or password", "application/json", Schemas.GenericError},
+      unauthorized: {"Possibly wrong email or password", "application/json", Schemas.GenericError},
       unprocessable_entity: {"Wrong data format", "application/json", Schemas.GenericError},
-      internal_server_error:
-        {@internal_server_error_text, "application/json", Schemas.GenericError}
+      internal_server_error: {@internal_server_error_text, "application/json", Schemas.GenericError}
     ]
 
   def create(conn, params) do
     create_user_token(conn, params)
-  end
-
-  operation :delete,
-    summary: "Revoke token",
-    parameters: [
-      id: [
-        in: :path,
-        description: "Token",
-        type: :string
-      ]
-    ],
-    responses: [
-      no_content: "Revoked successfully"
-    ]
-
-  def delete(conn, %{"token" => token}) do
-    Guardian.revoke(token)
-    send_resp(conn, :no_content, "")
   end
 
   defp create_user_token(conn, %{"user" => %{"email" => email, "password" => password}}) do

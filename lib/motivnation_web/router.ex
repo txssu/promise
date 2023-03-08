@@ -39,7 +39,6 @@ defmodule MotivNationWeb.Router do
     pipe_through :api
 
     post "/", TokenController, :create
-    delete "/:token", TokenController, :delete
   end
 
   scope "/api/users", MotivNationWeb do

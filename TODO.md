@@ -12,9 +12,6 @@
         - [x] Move user's `put` and `delete` over auth plug
     - [x] Enable CORS
     - [x] Add docs for paths
-    - [x] Add token revoking
-        - [x] Add GuardianDB
-        - [x] Add path for token revoking
     - [x] Use build in guardian plugs
 - [x] Use SecretVault for storing secrets
 - [x] Add dockerfile and docker-compose for developing
