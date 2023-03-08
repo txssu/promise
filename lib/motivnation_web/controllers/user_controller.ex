@@ -72,10 +72,14 @@ defmodule MotivNationWeb.UserController do
     ]
 
   def update(conn, %{"id" => id, "user" => user_params}) do
-    user = Accounts.get_user!(id)
+    user = conn.private.guardian_default_resource
 
-    with {:ok, %User{} = user} <- Accounts.update_user(user, user_params) do
-      render(conn, :show, user: user)
+    if user.id == id do
+      with {:ok, %User{} = user} <- Accounts.update_user(user, user_params) do
+        render(conn, :show, user: user)
+      end
+    else
+      send_resp(conn, :bad_request, "")
     end
   end
 
@@ -95,10 +99,14 @@ defmodule MotivNationWeb.UserController do
     ]
 
   def delete(conn, %{"id" => id}) do
-    user = Accounts.get_user!(id)
+    user = conn.private.guardian_default_resource
 
-    with {:ok, %User{}} <- Accounts.delete_user(user) do
-      send_resp(conn, :no_content, "")
+    if user.id == id do
+      with {:ok, %User{}} <- Accounts.delete_user(user) do
+        send_resp(conn, :no_content, "")
+      end
+    else
+      send_resp(conn, :bad_request, "")
     end
   end
 end
