@@ -1,14 +1,28 @@
 import Config
 
+repo_hostname =
+  if System.get_env("IN_DOCKER") do
+    "postgres"
+  else
+    "localhost"
+  end
+
 # Configure your database
 config :motivnation, MotivNation.Repo,
   username: "postgres",
   password: "postgres",
-  hostname: "localhost",
+  hostname: repo_hostname,
   database: "motivnation_dev",
   stacktrace: true,
   show_sensitive_data_on_connection_error: true,
   pool_size: 10
+
+endpoint_ip =
+  if System.get_env("IN_DOCKER") do
+    {0, 0, 0, 0}
+  else
+    {127, 0, 0, 1}
+  end
 
 # For development, we disable any cache and enable
 # debugging and code reloading.
@@ -19,7 +33,7 @@ config :motivnation, MotivNation.Repo,
 config :motivnation, MotivNationWeb.Endpoint,
   # Binding to loopback ipv4 address prevents access from other machines.
   # Change to `ip: {0, 0, 0, 0}` to allow access from other machines.
-  http: [ip: {127, 0, 0, 1}, port: 4000],
+  http: [ip: endpoint_ip, port: 4000],
   check_origin: false,
   code_reloader: true,
   debug_errors: true,

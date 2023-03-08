@@ -72,10 +72,6 @@ config :guardian, Guardian.DB,
   schema_name: "guardian_tokens", # default
   sweep_interval: 60 # default: 60 minutes
 
-#SecretVault config
-config :motivnation, :secret_vault,
-  default: [password: System.fetch_env!("SECRET_VAULT_PASSWORD")]
-
 # Import environment specific config. This must remain at the bottom
 # of this file so it overrides the configuration defined above.
 import_config "#{config_env()}.exs"
