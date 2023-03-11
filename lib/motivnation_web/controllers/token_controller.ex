@@ -17,10 +17,10 @@ defmodule MotivNationWeb.TokenController do
   tags ["tokens"]
 
   operation :create,
-    summary: "Update user",
+    summary: "Get token",
     request_body: {"User params", "application/json", Schemas.UserAuthData},
     responses: [
-      ok: {"Token and user id", "application/json", Schemas.TokenResponse},
+      created: {"Token and user id", "application/json", Schemas.TokenResponse},
       unauthorized: {"Possibly wrong email or password", "application/json", Schemas.GenericError},
       unprocessable_entity: {"Wrong data format", "application/json", Schemas.GenericError},
       internal_server_error: {@internal_server_error_text, "application/json", Schemas.GenericError}

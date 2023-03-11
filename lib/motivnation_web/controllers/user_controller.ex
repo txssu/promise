@@ -56,7 +56,7 @@ defmodule MotivNationWeb.UserController do
   security [%{}, %{"authorization" => ["authorization"]}]
 
   operation :update,
-    summary: "Edit user's data",
+    summary: "Edit user data",
     parameters: [
       id: [
         in: :path,
