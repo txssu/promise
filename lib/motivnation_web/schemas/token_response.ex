@@ -1,12 +1,17 @@
 defmodule MotivNationWeb.Schemas.TokenResponse do
   use MotivNationWeb, :openapi_schema
 
-  alias MotivNationWeb.Schemas.Token
-
-  OpenApiSpex.schema(%{
-    title: "TokenResponse",
-    description: "Response schema for token",
-    type: :object,
-    properties: %{data: Token}
-  })
+  def response() do
+    %OpenApiSpex.Response{
+      description: "Authorization was successful",
+      headers: %{
+        "Set-Cookie": %{
+          schema: %OpenApiSpex.Schema{
+            type: :string,
+            example: "guardian_motivnation_token=TOKEN; Path=/; HttpOnly"
+          }
+        }
+      }
+    }
+  end
 end

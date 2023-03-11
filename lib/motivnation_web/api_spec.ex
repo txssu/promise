@@ -17,7 +17,7 @@ defmodule MotivNationWeb.ApiSpec do
       },
       paths: Paths.from_router(Router),
       components: %Components{
-        securitySchemes: %{"authorization" => %SecurityScheme{type: "http", scheme: "bearer"}}
+        securitySchemes: %{"cookieAuth" => %SecurityScheme{type: "apiKey", in: "cookie", name: "guardian_motivnation_token"}}
       }
     }
     |> OpenApiSpex.resolve_schema_modules()

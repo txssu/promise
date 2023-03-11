@@ -15,7 +15,7 @@ defmodule MotivNationWeb.Router do
   end
 
   pipeline :ensure_authorized do
-    plug MotivNationWeb.AuthPipeline
+    plug MotivNationWeb.AuthPipeline, key: :motivnation
   end
 
   scope "/", MotivNationWeb do

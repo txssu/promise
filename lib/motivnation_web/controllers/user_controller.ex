@@ -72,7 +72,7 @@ defmodule MotivNationWeb.UserController do
     ]
 
   def update(conn, %{"id" => id, "user" => user_params}) do
-    user = conn.private.guardian_default_resource
+    user = Guardian.Plug.current_resource(conn, key: :motivnation)
 
     if user.id == id do
       with {:ok, %User{} = user} <- Accounts.update_user(user, user_params) do
@@ -99,7 +99,7 @@ defmodule MotivNationWeb.UserController do
     ]
 
   def delete(conn, %{"id" => id}) do
-    user = conn.private.guardian_default_resource
+    user = Guardian.Plug.current_resource(conn, key: :motivnation)
 
     if user.id == id do
       with {:ok, %User{}} <- Accounts.delete_user(user) do
