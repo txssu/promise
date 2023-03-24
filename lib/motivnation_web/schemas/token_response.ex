@@ -1,7 +1,8 @@
 defmodule MotivnationWeb.Schemas.TokenResponse do
+  @moduledoc false
   use MotivnationWeb, :openapi_schema
 
-  def response() do
+  def response do
     %OpenApiSpex.Response{
       description: "Authorization was successful",
       headers: %{

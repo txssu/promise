@@ -1,4 +1,5 @@
 defmodule MotivnationWeb.Schemas.GenericError do
+  @moduledoc false
   use MotivnationWeb, :openapi_schema
 
   OpenApiSpex.schema(%{

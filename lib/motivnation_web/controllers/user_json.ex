@@ -1,4 +1,5 @@
 defmodule MotivnationWeb.UserJSON do
+  @moduledoc false
   alias Motivnation.Accounts.User
 
   @doc """

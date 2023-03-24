@@ -9,7 +9,7 @@ defmodule MotivnationWeb.TokenController do
   alias Motivnation.Accounts.User
   alias Motivnation.Guardian
 
-  action_fallback(MotivnationWeb.FallbackController)
+  action_fallback MotivnationWeb.FallbackController
 
   @token_cookie_opts [
     http_only: true
@@ -20,9 +20,9 @@ defmodule MotivnationWeb.TokenController do
   this usually does not occur
   """
 
-  tags(["tokens"])
+  tags ["tokens"]
 
-  operation(:create,
+  operation :create,
     summary: "Get token",
     request_body: {"User params", "application/json", Schemas.UserAuthData},
     responses: [
@@ -33,7 +33,6 @@ defmodule MotivnationWeb.TokenController do
       internal_server_error:
         {@internal_server_error_text, "application/json", Schemas.GenericError}
     ]
-  )
 
   def create(conn, params) do
     create_user_token(conn, params)
