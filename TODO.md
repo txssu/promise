@@ -16,3 +16,10 @@
 - [x] Use SecretVault for storing secrets
 - [x] Add dockerfile and docker-compose for developing
 - [x] Response tokens in cookies
+
+# Databaes
+- [ ] Add goals
+- [ ] Add goal_joins
+- [ ] Add goal_subscribers
+- [ ] Add goal_reactions
+- [ ] Add goal_posts
