@@ -1,5 +1,5 @@
-defmodule MotivNationWeb.Schemas.UserAuthData do
-  use MotivNationWeb, :openapi_schema
+defmodule MotivnationWeb.Schemas.UserAuthData do
+  use MotivnationWeb, :openapi_schema
 
   OpenApiSpex.schema(%{
     title: "UserAuthData",

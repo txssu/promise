@@ -1,7 +1,7 @@
-defmodule MotivNationWeb.Schemas.UserResponse do
-  use MotivNationWeb, :openapi_schema
+defmodule MotivnationWeb.Schemas.UserResponse do
+  use MotivnationWeb, :openapi_schema
 
-  alias MotivNationWeb.Schemas.User
+  alias MotivnationWeb.Schemas.User
 
   OpenApiSpex.schema(%{
     title: "UserResponse",

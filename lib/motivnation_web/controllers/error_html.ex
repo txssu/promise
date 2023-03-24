@@ -1,6 +1,6 @@
-defmodule MotivNationWeb.ErrorHTML do
+defmodule MotivnationWeb.ErrorHTML do
   @moduledoc false
-  use MotivNationWeb, :html
+  use MotivnationWeb, :html
 
   # If you want to customize your error pages,
   # uncomment the embed_templates/1 call below

@@ -1,4 +1,4 @@
-defmodule MotivNation.Application do
+defmodule Motivnation.Application do
   # See https://hexdocs.pm/elixir/Application.html
   # for more information on OTP Applications
   @moduledoc false
@@ -9,22 +9,22 @@ defmodule MotivNation.Application do
   def start(_type, _args) do
     children = [
       # Start the Telemetry supervisor
-      MotivNationWeb.Telemetry,
+      MotivnationWeb.Telemetry,
       # Start the Ecto repository
-      MotivNation.Repo,
+      Motivnation.Repo,
       # Start the PubSub system
-      {Phoenix.PubSub, name: MotivNation.PubSub},
+      {Phoenix.PubSub, name: Motivnation.PubSub},
       # Start Finch
-      {Finch, name: MotivNation.Finch},
+      {Finch, name: Motivnation.Finch},
       # Start the Endpoint (http/https)
-      MotivNationWeb.Endpoint
-      # Start a worker by calling: MotivNation.Worker.start_link(arg)
-      # {MotivNation.Worker, arg}
+      MotivnationWeb.Endpoint
+      # Start a worker by calling: Motivnation.Worker.start_link(arg)
+      # {Motivnation.Worker, arg}
     ]
 
     # See https://hexdocs.pm/elixir/Supervisor.html
     # for other strategies and supported options
-    opts = [strategy: :one_for_one, name: MotivNation.Supervisor]
+    opts = [strategy: :one_for_one, name: Motivnation.Supervisor]
     Supervisor.start_link(children, opts)
   end
 
@@ -32,7 +32,7 @@ defmodule MotivNation.Application do
   # whenever the application is updated.
   @impl true
   def config_change(changed, _new, removed) do
-    MotivNationWeb.Endpoint.config_change(changed, removed)
+    MotivnationWeb.Endpoint.config_change(changed, removed)
     :ok
   end
 end

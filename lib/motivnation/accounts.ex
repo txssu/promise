@@ -1,12 +1,12 @@
-defmodule MotivNation.Accounts do
+defmodule Motivnation.Accounts do
   @moduledoc """
   The Accounts context.
   """
 
   import Ecto.Query, warn: false
-  alias MotivNation.Repo
+  alias Motivnation.Repo
 
-  alias MotivNation.Accounts.User
+  alias Motivnation.Accounts.User
 
   @doc """
   Returns the list of users.

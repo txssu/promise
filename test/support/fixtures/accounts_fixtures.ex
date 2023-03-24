@@ -1,7 +1,7 @@
-defmodule MotivNation.AccountsFixtures do
+defmodule Motivnation.AccountsFixtures do
   @moduledoc """
   This module defines test helpers for creating
-  entities via the `MotivNation.Accounts` context.
+  entities via the `Motivnation.Accounts` context.
   """
 
   @doc """
@@ -14,7 +14,7 @@ defmodule MotivNation.AccountsFixtures do
         email: "some email",
         password_hash: "some password_hash"
       })
-      |> MotivNation.Accounts.create_user()
+      |> Motivnation.Accounts.create_user()
 
     user
   end

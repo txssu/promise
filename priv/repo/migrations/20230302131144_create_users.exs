@@ -1,4 +1,4 @@
-defmodule MotivNation.Repo.Migrations.CreateUsers do
+defmodule Motivnation.Repo.Migrations.CreateUsers do
   use Ecto.Migration
 
   def change do

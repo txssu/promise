@@ -1,4 +1,4 @@
-defmodule MotivNationWeb.CoreComponents do
+defmodule MotivnationWeb.CoreComponents do
   @moduledoc """
   Provides core UI components.
 
@@ -14,7 +14,7 @@ defmodule MotivNationWeb.CoreComponents do
   alias Phoenix.HTML.Form
   alias Phoenix.LiveView.JS
 
-  import MotivNationWeb.Gettext
+  import MotivnationWeb.Gettext
 
   @doc """
   Renders a modal.
@@ -648,9 +648,9 @@ defmodule MotivNationWeb.CoreComponents do
     # should be written to the errors.po file. The :count option is
     # set by Ecto and indicates we should also apply plural rules.
     if count = opts[:count] do
-      Gettext.dngettext(MotivNationWeb.Gettext, "errors", msg, msg, count, opts)
+      Gettext.dngettext(MotivnationWeb.Gettext, "errors", msg, msg, count, opts)
     else
-      Gettext.dgettext(MotivNationWeb.Gettext, "errors", msg, opts)
+      Gettext.dgettext(MotivnationWeb.Gettext, "errors", msg, opts)
     end
   end
 

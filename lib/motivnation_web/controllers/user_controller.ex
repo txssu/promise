@@ -1,11 +1,11 @@
-defmodule MotivNationWeb.UserController do
-  use MotivNationWeb, :controller
+defmodule MotivnationWeb.UserController do
+  use MotivnationWeb, :controller
   use OpenApiSpex.ControllerSpecs
 
-  alias MotivNation.Accounts
-  alias MotivNation.Accounts.User
+  alias Motivnation.Accounts
+  alias Motivnation.Accounts.User
 
-  action_fallback MotivNationWeb.FallbackController
+  action_fallback MotivnationWeb.FallbackController
 
   tags ["users"]
 

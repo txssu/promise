@@ -1,4 +1,4 @@
-defmodule MotivNation.Guardian do
+defmodule Motivnation.Guardian do
   @moduledoc false
   use Guardian, otp_app: :motivnation
 
@@ -12,7 +12,7 @@ defmodule MotivNation.Guardian do
   end
 
   def resource_from_claims(%{"sub" => id}) do
-    resource = MotivNation.Accounts.get_user!(id)
+    resource = Motivnation.Accounts.get_user!(id)
     {:ok, resource}
   end
 

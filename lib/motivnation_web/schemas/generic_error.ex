@@ -1,5 +1,5 @@
-defmodule MotivNationWeb.Schemas.GenericError do
-  use MotivNationWeb, :openapi_schema
+defmodule MotivnationWeb.Schemas.GenericError do
+  use MotivnationWeb, :openapi_schema
 
   OpenApiSpex.schema(%{
     title: "GenericError",

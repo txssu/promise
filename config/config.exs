@@ -8,18 +8,18 @@
 import Config
 
 config :motivnation,
-  namespace: MotivNation,
-  ecto_repos: [MotivNation.Repo],
+  namespace: Motivnation,
+  ecto_repos: [Motivnation.Repo],
   generators: [binary_id: true]
 
 # Configures the endpoint
-config :motivnation, MotivNationWeb.Endpoint,
+config :motivnation, MotivnationWeb.Endpoint,
   url: [host: "localhost"],
   render_errors: [
-    formats: [html: MotivNationWeb.ErrorHTML, json: MotivNationWeb.ErrorJSON],
+    formats: [html: MotivnationWeb.ErrorHTML, json: MotivnationWeb.ErrorJSON],
     layout: false
   ],
-  pubsub_server: MotivNation.PubSub,
+  pubsub_server: Motivnation.PubSub,
   live_view: [signing_salt: "VRA6s2WX"]
 
 # Configures the mailer
@@ -29,7 +29,7 @@ config :motivnation, MotivNationWeb.Endpoint,
 #
 # For production it's recommended to configure a different adapter
 # at the `config/runtime.exs`.
-config :motivnation, MotivNation.Mailer, adapter: Swoosh.Adapters.Local
+config :motivnation, Motivnation.Mailer, adapter: Swoosh.Adapters.Local
 
 # Configure esbuild (the version is required)
 config :esbuild,
@@ -62,7 +62,7 @@ config :logger, :console,
 config :phoenix, :json_library, Jason
 
 # Guardian config
-config :motivnation, MotivNation.Guardian,
+config :motivnation, Motivnation.Guardian,
   issuer: "motivnation",
   secret_key: "Secret key. You can use `mix guardian.gen.secret` to get one"
 

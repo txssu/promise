@@ -1,5 +1,5 @@
-defmodule MotivNationWeb.Schemas.User do
-  use MotivNationWeb, :openapi_schema
+defmodule MotivnationWeb.Schemas.User do
+  use MotivnationWeb, :openapi_schema
 
   OpenApiSpex.schema(%{
     title: "User",

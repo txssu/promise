@@ -1,4 +1,4 @@
-defmodule MotivNation.MixProject do
+defmodule Motivnation.MixProject do
   use Mix.Project
 
   def project do
@@ -18,7 +18,7 @@ defmodule MotivNation.MixProject do
   # Type `mix help compile.app` for more information.
   def application do
     [
-      mod: {MotivNation.Application, []},
+      mod: {Motivnation.Application, []},
       extra_applications: [:logger, :runtime_tools]
     ]
   end

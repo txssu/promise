@@ -1,9 +1,9 @@
-defmodule MotivNationWeb.UserControllerTest do
-  use MotivNationWeb.ConnCase
+defmodule MotivnationWeb.UserControllerTest do
+  use MotivnationWeb.ConnCase
 
-  import MotivNation.AccountsFixtures
+  import Motivnation.AccountsFixtures
 
-  alias MotivNation.Accounts.User
+  alias Motivnation.Accounts.User
 
   @create_attrs %{
     email: "some email",

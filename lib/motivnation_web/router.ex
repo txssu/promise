@@ -1,24 +1,24 @@
-defmodule MotivNationWeb.Router do
-  use MotivNationWeb, :router
+defmodule MotivnationWeb.Router do
+  use MotivnationWeb, :router
 
   pipeline :browser do
     plug :accepts, ["html"]
     plug :fetch_session
     plug :fetch_live_flash
-    plug :put_root_layout, {MotivNationWeb.Layouts, :root}
+    plug :put_root_layout, {MotivnationWeb.Layouts, :root}
     plug :protect_from_forgery
   end
 
   pipeline :api do
     plug :accepts, ["json"]
-    plug OpenApiSpex.Plug.PutApiSpec, module: MotivNationWeb.ApiSpec
+    plug OpenApiSpex.Plug.PutApiSpec, module: MotivnationWeb.ApiSpec
   end
 
   pipeline :ensure_authorized do
-    plug MotivNationWeb.AuthPipeline, key: :motivnation
+    plug MotivnationWeb.AuthPipeline, key: :motivnation
   end
 
-  scope "/", MotivNationWeb do
+  scope "/", MotivnationWeb do
     pipe_through :browser
 
     get "/", PageController, :home
@@ -35,13 +35,13 @@ defmodule MotivNationWeb.Router do
     get "/openapi", OpenApiSpex.Plug.RenderSpec, []
   end
 
-  scope "/api/tokens", MotivNationWeb do
+  scope "/api/tokens", MotivnationWeb do
     pipe_through :api
 
     post "/", TokenController, :create
   end
 
-  scope "/api/users", MotivNationWeb do
+  scope "/api/users", MotivnationWeb do
     pipe_through :api
 
     get "/", UserController, :index
@@ -50,7 +50,7 @@ defmodule MotivNationWeb.Router do
     get "/:id", UserController, :show
   end
 
-  scope "/api/users", MotivNationWeb do
+  scope "/api/users", MotivnationWeb do
     pipe_through [:api, :ensure_authorized]
 
     put "/:id", UserController, :update
@@ -58,7 +58,7 @@ defmodule MotivNationWeb.Router do
   end
 
   # Other scopes may use custom stacks.
-  # scope "/api", MotivNationWeb do
+  # scope "/api", MotivnationWeb do
   #   pipe_through :api
   # end
 
@@ -74,7 +74,7 @@ defmodule MotivNationWeb.Router do
     scope "/dev" do
       pipe_through :browser
 
-      live_dashboard "/dashboard", metrics: MotivNationWeb.Telemetry
+      live_dashboard "/dashboard", metrics: MotivnationWeb.Telemetry
       forward "/mailbox", Plug.Swoosh.MailboxPreview
     end
   end

@@ -1,6 +1,6 @@
-defmodule MotivNationWeb.PageHTML do
+defmodule MotivnationWeb.PageHTML do
   @moduledoc false
-  use MotivNationWeb, :html
+  use MotivnationWeb, :html
 
   embed_templates "page_html/*"
 end

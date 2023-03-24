@@ -1,4 +1,4 @@
-defmodule MotivNationWeb.Telemetry do
+defmodule MotivnationWeb.Telemetry do
   @moduledoc false
   use Supervisor
   import Telemetry.Metrics
@@ -87,7 +87,7 @@ defmodule MotivNationWeb.Telemetry do
     [
       # A module, function and arguments to be invoked periodically.
       # This function must call :telemetry.execute/3 and a metric must be added above.
-      # {MotivNationWeb, :count_users, []}
+      # {MotivnationWeb, :count_users, []}
     ]
   end
 end

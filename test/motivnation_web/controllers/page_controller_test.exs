@@ -1,5 +1,5 @@
-defmodule MotivNationWeb.PageControllerTest do
-  use MotivNationWeb.ConnCase
+defmodule MotivnationWeb.PageControllerTest do
+  use MotivnationWeb.ConnCase
 
   test "GET /", %{conn: conn} do
     conn = get(conn, ~p"/")

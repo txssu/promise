@@ -1,4 +1,4 @@
-# MotivNation ToDo list
+# Motivnation ToDo list
 ## Before
 - [x] Add Credo and Dialyxir
 - [x] Add OpenAPI spec library

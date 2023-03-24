@@ -1,9 +1,9 @@
-defmodule MotivNationWeb.AuthPipeline do
+defmodule MotivnationWeb.AuthPipeline do
   @moduledoc false
   use Guardian.Plug.Pipeline,
     otp_app: :motivnation,
-    module: MotivNation.Guardian,
-    error_handler: MotivNationWeb.AuthErrorHandler,
+    module: Motivnation.Guardian,
+    error_handler: MotivnationWeb.AuthErrorHandler,
     key: :motivnation
 
   plug Guardian.Plug.VerifyHeader,

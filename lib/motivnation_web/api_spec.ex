@@ -1,9 +1,9 @@
-defmodule MotivNationWeb.ApiSpec do
+defmodule MotivnationWeb.ApiSpec do
   @moduledoc false
   @behaviour OpenApiSpex.OpenApi
 
   alias OpenApiSpex.{Components, Info, OpenApi, Paths, SecurityScheme, Server}
-  alias MotivNationWeb.{Endpoint, Router}
+  alias MotivnationWeb.{Endpoint, Router}
 
   @impl true
   def spec do

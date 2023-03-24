@@ -1,12 +1,12 @@
-defmodule MotivNation.AccountsTest do
-  use MotivNation.DataCase
+defmodule Motivnation.AccountsTest do
+  use Motivnation.DataCase
 
-  alias MotivNation.Accounts
+  alias Motivnation.Accounts
 
   describe "users" do
-    alias MotivNation.Accounts.User
+    alias Motivnation.Accounts.User
 
-    import MotivNation.AccountsFixtures
+    import Motivnation.AccountsFixtures
 
     @invalid_attrs %{email: nil, password_hash: nil}
 

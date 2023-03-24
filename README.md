@@ -1,4 +1,4 @@
-# MotivNation
+# Motivnation
 
 To start your Phoenix server:
 

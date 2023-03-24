@@ -1,4 +1,4 @@
-defmodule MotivNationWeb.Endpoint do
+defmodule MotivnationWeb.Endpoint do
   use Phoenix.Endpoint, otp_app: :motivnation
 
   # The session will be stored in the cookie and signed,
@@ -21,7 +21,7 @@ defmodule MotivNationWeb.Endpoint do
     at: "/",
     from: :motivnation,
     gzip: false,
-    only: MotivNationWeb.static_paths()
+    only: MotivnationWeb.static_paths()
 
   # Code reloading can be explicitly enabled under the
   # :code_reloader configuration of your endpoint.
@@ -48,5 +48,5 @@ defmodule MotivNationWeb.Endpoint do
   plug Plug.Head
   plug Plug.Session, @session_options
   plug CORSPlug
-  plug MotivNationWeb.Router
+  plug MotivnationWeb.Router
 end

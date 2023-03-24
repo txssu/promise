@@ -1,4 +1,4 @@
-defmodule MotivNationWeb.AuthErrorHandler do
+defmodule MotivnationWeb.AuthErrorHandler do
   @moduledoc false
   @behaviour Guardian.Plug.ErrorHandler
 

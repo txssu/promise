@@ -1,12 +1,12 @@
-defmodule MotivNationWeb do
+defmodule MotivnationWeb do
   @moduledoc """
   The entrypoint for defining your web interface, such
   as controllers, components, channels, and so on.
 
   This can be used in your application as:
 
-      use MotivNationWeb, :controller
-      use MotivNationWeb, :html
+      use MotivnationWeb, :controller
+      use MotivnationWeb, :html
 
   The definitions below will be executed for every controller,
   component, etc, so keep them short and clean, focused
@@ -40,12 +40,12 @@ defmodule MotivNationWeb do
     quote do
       use Phoenix.Controller,
         formats: [:html, :json],
-        layouts: [html: MotivNationWeb.Layouts]
+        layouts: [html: MotivnationWeb.Layouts]
 
       import Plug.Conn
-      import MotivNationWeb.Gettext
+      import MotivnationWeb.Gettext
 
-      alias MotivNationWeb.Schemas
+      alias MotivnationWeb.Schemas
 
       unquote(verified_routes())
     end
@@ -54,7 +54,7 @@ defmodule MotivNationWeb do
   def live_view do
     quote do
       use Phoenix.LiveView,
-        layout: {MotivNationWeb.Layouts, :app}
+        layout: {MotivnationWeb.Layouts, :app}
 
       unquote(html_helpers())
     end
@@ -86,8 +86,8 @@ defmodule MotivNationWeb do
       # HTML escaping functionality
       import Phoenix.HTML
       # Core UI components and translation
-      import MotivNationWeb.CoreComponents
-      import MotivNationWeb.Gettext
+      import MotivnationWeb.CoreComponents
+      import MotivnationWeb.Gettext
 
       # Shortcut for generating JS commands
       alias Phoenix.LiveView.JS
@@ -100,9 +100,9 @@ defmodule MotivNationWeb do
   def verified_routes do
     quote do
       use Phoenix.VerifiedRoutes,
-        endpoint: MotivNationWeb.Endpoint,
-        router: MotivNationWeb.Router,
-        statics: MotivNationWeb.static_paths()
+        endpoint: MotivnationWeb.Endpoint,
+        router: MotivnationWeb.Router,
+        statics: MotivnationWeb.static_paths()
     end
   end
 

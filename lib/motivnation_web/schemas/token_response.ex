@@ -1,5 +1,5 @@
-defmodule MotivNationWeb.Schemas.TokenResponse do
-  use MotivNationWeb, :openapi_schema
+defmodule MotivnationWeb.Schemas.TokenResponse do
+  use MotivnationWeb, :openapi_schema
 
   def response() do
     %OpenApiSpex.Response{

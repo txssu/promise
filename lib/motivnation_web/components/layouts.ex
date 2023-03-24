@@ -1,6 +1,6 @@
-defmodule MotivNationWeb.Layouts do
+defmodule MotivnationWeb.Layouts do
   @moduledoc false
-  use MotivNationWeb, :html
+  use MotivnationWeb, :html
 
   embed_templates "layouts/*"
 end

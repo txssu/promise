@@ -1,4 +1,4 @@
-defmodule MotivNationWeb.ChangesetJSON do
+defmodule MotivnationWeb.ChangesetJSON do
   @moduledoc false
   @doc """
   Renders changeset errors.
@@ -14,9 +14,9 @@ defmodule MotivNationWeb.ChangesetJSON do
     # uncommenting and adjusting the following code:
 
     # if count = opts[:count] do
-    #   Gettext.dngettext(MotivNationWeb.Gettext, "errors", msg, msg, count, opts)
+    #   Gettext.dngettext(MotivnationWeb.Gettext, "errors", msg, msg, count, opts)
     # else
-    #   Gettext.dgettext(MotivNationWeb.Gettext, "errors", msg, opts)
+    #   Gettext.dgettext(MotivnationWeb.Gettext, "errors", msg, opts)
     # end
 
     Enum.reduce(opts, msg, fn {key, value}, acc ->

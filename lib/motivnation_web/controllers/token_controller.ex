@@ -1,15 +1,15 @@
-defmodule MotivNationWeb.TokenController do
+defmodule MotivnationWeb.TokenController do
   @moduledoc false
-  use MotivNationWeb, :controller
+  use MotivnationWeb, :controller
   use OpenApiSpex.ControllerSpecs
 
   import Guardian.Plug.Keys, only: [token_key: 1]
 
-  alias MotivNation.Accounts
-  alias MotivNation.Accounts.User
-  alias MotivNation.Guardian
+  alias Motivnation.Accounts
+  alias Motivnation.Accounts.User
+  alias Motivnation.Guardian
 
-  action_fallback(MotivNationWeb.FallbackController)
+  action_fallback(MotivnationWeb.FallbackController)
 
   @token_cookie_opts [
     http_only: true
@@ -56,21 +56,21 @@ defmodule MotivNationWeb.TokenController do
   defp create_user_token(conn, _data) do
     conn
     |> put_status(:unprocessable_entity)
-    |> put_view(json: MotivNationWeb.ErrorJSON)
+    |> put_view(json: MotivnationWeb.ErrorJSON)
     |> render("422.json")
   end
 
   defp handle_errors(conn, {:getting_user, _error}) do
     conn
     |> put_status(:unauthorized)
-    |> put_view(json: MotivNationWeb.ErrorJSON)
+    |> put_view(json: MotivnationWeb.ErrorJSON)
     |> render("401.json", message: "Wrong email or password")
   end
 
   defp handle_errors(conn, {:token_creating, _error}) do
     conn
     |> put_status(:internal_server_error)
-    |> put_view(json: MotivNationWeb.ErrorJSON)
+    |> put_view(json: MotivnationWeb.ErrorJSON)
     |> render("500.json")
   end
 

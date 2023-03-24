@@ -1,5 +1,5 @@
-defmodule MotivNationWeb.UserJSON do
-  alias MotivNation.Accounts.User
+defmodule MotivnationWeb.UserJSON do
+  alias Motivnation.Accounts.User
 
   @doc """
   Renders a list of users.

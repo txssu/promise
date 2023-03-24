@@ -8,7 +8,7 @@ repo_hostname =
   end
 
 # Configure your database
-config :motivnation, MotivNation.Repo,
+config :motivnation, Motivnation.Repo,
   username: "postgres",
   password: "postgres",
   hostname: repo_hostname,
@@ -30,7 +30,7 @@ endpoint_ip =
 # The watchers configuration can be used to run external
 # watchers to your application. For example, we use it
 # with esbuild to bundle .js and .css sources.
-config :motivnation, MotivNationWeb.Endpoint,
+config :motivnation, MotivnationWeb.Endpoint,
   # Binding to loopback ipv4 address prevents access from other machines.
   # Change to `ip: {0, 0, 0, 0}` to allow access from other machines.
   http: [ip: endpoint_ip, port: 4000],
@@ -67,7 +67,7 @@ config :motivnation, MotivNationWeb.Endpoint,
 # different ports.
 
 # Watch static and templates for browser reloading.
-config :motivnation, MotivNationWeb.Endpoint,
+config :motivnation, MotivnationWeb.Endpoint,
   live_reload: [
     patterns: [
       ~r"priv/static/.*(js|css|png|jpeg|jpg|gif|svg)$",
