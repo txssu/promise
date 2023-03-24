@@ -44,17 +44,16 @@ defmodule MotivnationWeb.Router do
   scope "/api/users", MotivnationWeb do
     pipe_through :api
 
-    get "/", UserController, :index
-    post "/", UserController, :create
-
     get "/:id", UserController, :show
+    post "/", UserController, :create
   end
 
-  scope "/api/users", MotivnationWeb do
+  scope "/api/profile", MotivnationWeb do
     pipe_through [:api, :ensure_authorized]
 
-    put "/:id", UserController, :update
-    delete "/:id", UserController, :delete
+    get "/", ProfileController, :show
+    put "/", ProfileController, :update
+    delete "/", ProfileController, :delete
   end
 
   # Other scopes may use custom stacks.
