@@ -1,9 +1,9 @@
-defmodule Motivnation.MixProject do
+defmodule Promise.MixProject do
   use Mix.Project
 
   def project do
     [
-      app: :motivnation,
+      app: :promise,
       version: "0.1.0",
       elixir: "~> 1.14",
       elixirc_paths: elixirc_paths(Mix.env()),
@@ -18,7 +18,7 @@ defmodule Motivnation.MixProject do
   # Type `mix help compile.app` for more information.
   def application do
     [
-      mod: {Motivnation.Application, []},
+      mod: {Promise.Application, []},
       extra_applications: [:logger, :runtime_tools]
     ]
   end

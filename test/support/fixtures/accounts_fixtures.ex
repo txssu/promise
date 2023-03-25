@@ -1,7 +1,7 @@
-defmodule Motivnation.AccountsFixtures do
+defmodule Promise.AccountsFixtures do
   @moduledoc """
   This module defines test helpers for creating
-  entities via the `Motivnation.Accounts` context.
+  entities via the `Promise.Accounts` context.
   """
 
   @doc """
@@ -14,7 +14,7 @@ defmodule Motivnation.AccountsFixtures do
         email: "some email",
         password_hash: "some password_hash"
       })
-      |> Motivnation.Accounts.create_user()
+      |> Promise.Accounts.create_user()
 
     user
   end

@@ -1,7 +1,7 @@
-defmodule Motivnation.GoalsFixtures do
+defmodule Promise.GoalsFixtures do
   @moduledoc """
   This module defines test helpers for creating
-  entities via the `Motivnation.Goals` context.
+  entities via the `Promise.Goals` context.
   """
 
   @doc """
@@ -13,7 +13,7 @@ defmodule Motivnation.GoalsFixtures do
       |> Enum.into(%{
         title: "some title"
       })
-      |> Motivnation.Goals.create_goal()
+      |> Promise.Goals.create_goal()
 
     goal
   end

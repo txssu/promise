@@ -13,20 +13,20 @@ import SecretVault, only: [runtime_secret!: 2]
 # If you use `mix release`, you need to explicitly enable the server
 # by passing the PHX_SERVER=true when you start it:
 #
-#     PHX_SERVER=true bin/motivnation start
+#     PHX_SERVER=true bin/promise start
 #
 # Alternatively, you can use `mix phx.gen.release` to generate a `bin/server`
 # script that automatically sets the env var above.
 if System.get_env("PHX_SERVER") do
-  config :motivnation, MotivnationWeb.Endpoint, server: true
+  config :promise, PromiseWeb.Endpoint, server: true
 end
 
 if config_env() == :prod do
-  database_url = runtime_secret!(:motivnation, "DATABASE_URL")
+  database_url = runtime_secret!(:promise, "DATABASE_URL")
 
   maybe_ipv6 = if System.get_env("ECTO_IPV6") in ~w(true 1), do: [:inet6], else: []
 
-  config :motivnation, Motivnation.Repo,
+  config :promise, Promise.Repo,
     # ssl: true,
     url: database_url,
     pool_size: String.to_integer(System.get_env("POOL_SIZE") || "10"),
@@ -37,15 +37,15 @@ if config_env() == :prod do
   # want to use a different value for prod and you most likely don't want
   # to check this value into version control, so we use an environment
   # variable instead.
-  secret_key_base = runtime_secret!(:motivnation, "SECRET_KEY_BASE")
+  secret_key_base = runtime_secret!(:promise, "SECRET_KEY_BASE")
 
-  config :motivnation, Motivnation.Guardian,
-    secret_key: runtime_secret!(:motivnation, "SECRET_KEY_BASE")
+  config :promise, Promise.Guardian,
+    secret_key: runtime_secret!(:promise, "SECRET_KEY_BASE")
 
   host = System.get_env("PHX_HOST") || "example.com"
   port = String.to_integer(System.get_env("PORT") || "4000")
 
-  config :motivnation, MotivnationWeb.Endpoint,
+  config :promise, PromiseWeb.Endpoint,
     url: [host: host, port: 443, scheme: "https"],
     http: [
       # Enable IPv6 and bind on all interfaces.
@@ -62,7 +62,7 @@ if config_env() == :prod do
   # To get SSL working, you will need to add the `https` key
   # to your endpoint configuration:
   #
-  #     config :motivnation, MotivnationWeb.Endpoint,
+  #     config :promise, PromiseWeb.Endpoint,
   #       https: [
   #         ...,
   #         port: 443,
@@ -84,7 +84,7 @@ if config_env() == :prod do
   # We also recommend setting `force_ssl` in your endpoint, ensuring
   # no data is ever sent via http, always redirecting to https:
   #
-  #     config :motivnation, MotivnationWeb.Endpoint,
+  #     config :promise, PromiseWeb.Endpoint,
   #       force_ssl: [hsts: true]
   #
   # Check `Plug.SSL` for all available options in `force_ssl`.
@@ -95,7 +95,7 @@ if config_env() == :prod do
   # Also, you may need to configure the Swoosh API client of your choice if you
   # are not using SMTP. Here is an example of the configuration:
   #
-  #     config :motivnation, Motivnation.Mailer,
+  #     config :promise, Promise.Mailer,
   #       adapter: Swoosh.Adapters.Mailgun,
   #       api_key: System.get_env("MAILGUN_API_KEY"),
   #       domain: System.get_env("MAILGUN_DOMAIN")

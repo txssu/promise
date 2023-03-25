@@ -8,11 +8,11 @@ repo_hostname =
   end
 
 # Configure your database
-config :motivnation, Motivnation.Repo,
+config :promise, Promise.Repo,
   username: "postgres",
   password: "postgres",
   hostname: repo_hostname,
-  database: "motivnation_dev",
+  database: "promise_dev",
   stacktrace: true,
   show_sensitive_data_on_connection_error: true,
   pool_size: 10
@@ -30,7 +30,7 @@ endpoint_ip =
 # The watchers configuration can be used to run external
 # watchers to your application. For example, we use it
 # with esbuild to bundle .js and .css sources.
-config :motivnation, MotivnationWeb.Endpoint,
+config :promise, PromiseWeb.Endpoint,
   # Binding to loopback ipv4 address prevents access from other machines.
   # Change to `ip: {0, 0, 0, 0}` to allow access from other machines.
   http: [ip: endpoint_ip, port: 4000],
@@ -67,17 +67,17 @@ config :motivnation, MotivnationWeb.Endpoint,
 # different ports.
 
 # Watch static and templates for browser reloading.
-config :motivnation, MotivnationWeb.Endpoint,
+config :promise, PromiseWeb.Endpoint,
   live_reload: [
     patterns: [
       ~r"priv/static/.*(js|css|png|jpeg|jpg|gif|svg)$",
       ~r"priv/gettext/.*(po)$",
-      ~r"lib/motivnation_web/(controllers|live|components)/.*(ex|heex)$"
+      ~r"lib/promise_web/(controllers|live|components)/.*(ex|heex)$"
     ]
   ]
 
 # Enable dev routes for dashboard and mailbox
-config :motivnation, dev_routes: true
+config :promise, dev_routes: true
 
 # Do not include metadata nor timestamps in development logs
 config :logger, :console, format: "[$level] $message\n"

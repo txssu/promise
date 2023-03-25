@@ -1,4 +1,4 @@
-defmodule Motivnation.Repo.Migrations.CreateGoals do
+defmodule Promise.Repo.Migrations.CreateGoals do
   use Ecto.Migration
 
   def change do

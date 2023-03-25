@@ -7,19 +7,19 @@
 # General application configuration
 import Config
 
-config :motivnation,
-  namespace: Motivnation,
-  ecto_repos: [Motivnation.Repo],
+config :promise,
+  namespace: Promise,
+  ecto_repos: [Promise.Repo],
   generators: [binary_id: true]
 
 # Configures the endpoint
-config :motivnation, MotivnationWeb.Endpoint,
+config :promise, PromiseWeb.Endpoint,
   url: [host: "localhost"],
   render_errors: [
-    formats: [html: MotivnationWeb.ErrorHTML, json: MotivnationWeb.ErrorJSON],
+    formats: [html: PromiseWeb.ErrorHTML, json: PromiseWeb.ErrorJSON],
     layout: false
   ],
-  pubsub_server: Motivnation.PubSub,
+  pubsub_server: Promise.PubSub,
   live_view: [signing_salt: "VRA6s2WX"]
 
 # Configures the mailer
@@ -29,7 +29,7 @@ config :motivnation, MotivnationWeb.Endpoint,
 #
 # For production it's recommended to configure a different adapter
 # at the `config/runtime.exs`.
-config :motivnation, Motivnation.Mailer, adapter: Swoosh.Adapters.Local
+config :promise, Promise.Mailer, adapter: Swoosh.Adapters.Local
 
 # Configure esbuild (the version is required)
 config :esbuild,
@@ -62,8 +62,8 @@ config :logger, :console,
 config :phoenix, :json_library, Jason
 
 # Guardian config
-config :motivnation, Motivnation.Guardian,
-  issuer: "motivnation",
+config :promise, Promise.Guardian,
+  issuer: "promise",
   secret_key: "Secret key. You can use `mix guardian.gen.secret` to get one"
 
 # Import environment specific config. This must remain at the bottom

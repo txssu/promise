@@ -1,4 +1,4 @@
-# Motivnation
+# Promise
 
 To start your Phoenix server:
 
