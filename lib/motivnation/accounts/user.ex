@@ -44,8 +44,10 @@ defmodule Motivnation.Accounts.User do
     |> validate_length(:password, min: 8)
   end
 
-  defp put_password_hash(%Ecto.Changeset{valid?: true, changes: %{password: password}} = changeset), do:
-    change(changeset, Argon2.add_hash(password))
+  defp put_password_hash(
+         %Ecto.Changeset{valid?: true, changes: %{password: password}} = changeset
+       ),
+       do: change(changeset, Argon2.add_hash(password))
 
   defp put_password_hash(changeset), do: changeset
 end

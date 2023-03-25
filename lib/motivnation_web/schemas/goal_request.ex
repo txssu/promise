@@ -8,7 +8,7 @@ defmodule MotivnationWeb.Schemas.GoalParams do
     title: "GoalRequest",
     type: :object,
     properties: %{
-      goal: %Schema{anyOf: [Goal]},
+      goal: %Schema{anyOf: [Goal]}
     }
   })
 end

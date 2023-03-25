@@ -10,7 +10,7 @@ defmodule MotivnationWeb.Schemas.Goal do
     properties: %{
       id: %Schema{type: :string, format: :uuid},
       user_id: %Schema{type: :string, format: :uuid},
-      title: %Schema{type: :string},
+      title: %Schema{type: :string}
     }
   })
 end
