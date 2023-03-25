@@ -1,5 +1,6 @@
 defmodule Motivnation.Accounts.User do
   @moduledoc false
+  alias Motivnation.Goals.Goal
   use Ecto.Schema
   import Ecto.Changeset
 
@@ -9,6 +10,8 @@ defmodule Motivnation.Accounts.User do
     field :email, :string
     field :password, :string, virtual: true
     field :password_hash, :string
+
+    has_many :goals, Goal
 
     timestamps()
   end

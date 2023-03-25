@@ -56,6 +56,17 @@ defmodule MotivnationWeb.Router do
     delete "/", ProfileController, :delete
   end
 
+  scope "/api/goals", MotivnationWeb do
+    pipe_through [:api, :ensure_authorized]
+
+    get "/", GoalController, :index
+    post "/", GoalController, :create
+
+    get "/:id", GoalController, :show
+    put "/:id", GoalController, :update
+    delete "/:id", GoalController, :delete
+  end
+
   # Other scopes may use custom stacks.
   # scope "/api", MotivnationWeb do
   #   pipe_through :api

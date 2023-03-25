@@ -18,7 +18,7 @@
 - [x] Response tokens in cookies
 
 # Databaes
-- [ ] Add goals
+- [x] Add goals
 - [ ] Add goal_joins
 - [ ] Add goal_subscribers
 - [ ] Add goal_reactions
