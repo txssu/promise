@@ -23,3 +23,6 @@
 - [ ] Add goal_subscribers
 - [ ] Add goal_reactions
 - [ ] Add goal_posts
+
+# FIXMEs
+- [ ] Can't delete account, when you're author of some goal
