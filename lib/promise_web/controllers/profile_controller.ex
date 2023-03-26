@@ -9,6 +9,10 @@ defmodule PromiseWeb.ProfileController do
 
   plug :put_view, json: PromiseWeb.UserJSON
 
+  plug PromiseWeb.Plugs.ResourceLoader,
+    key: :current_user,
+    loader: PromiseWeb.Loaders.CurrentUserLoader
+
   action_fallback PromiseWeb.FallbackController
 
   tags ["profile"]
@@ -24,9 +28,7 @@ defmodule PromiseWeb.ProfileController do
     ]
 
   def show(conn, _params) do
-    user = Guardian.Plug.current_resource(conn, key: :promise)
-    IO.inspect(user)
-    render(conn, :show, user: user)
+    render(conn, :show, user: conn.assigns.current_user)
   end
 
   operation :update,
@@ -37,7 +39,7 @@ defmodule PromiseWeb.ProfileController do
     ]
 
   def update(conn, %{"user" => user_params}) do
-    user = Guardian.Plug.current_resource(conn, key: :promise)
+    user = conn.assigns.current_user
 
     with {:ok, %User{} = user} <- Accounts.update_user(user, user_params) do
       render(conn, :show, user: user)
@@ -51,7 +53,7 @@ defmodule PromiseWeb.ProfileController do
     ]
 
   def delete(conn, _params) do
-    user = Guardian.Plug.current_resource(conn, key: :promise)
+    user = conn.assigns.current_user
 
     with {:ok, %User{}} <- Accounts.delete_user(user) do
       conn
