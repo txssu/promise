@@ -56,4 +56,56 @@ defmodule Promise.GoalsTest do
       assert %Ecto.Changeset{} = Goals.change_goal(goal)
     end
   end
+
+  describe "goal_joins" do
+    alias Promise.Goals.Join
+
+    import Promise.GoalsFixtures
+
+    @invalid_attrs %{}
+
+    test "list_goal_joins/0 returns all goal_joins" do
+      join = join_fixture()
+      assert Goals.list_goal_joins() == [join]
+    end
+
+    test "get_join!/1 returns the join with given id" do
+      join = join_fixture()
+      assert Goals.get_join!(join.id) == join
+    end
+
+    test "create_join/1 with valid data creates a join" do
+      valid_attrs = %{}
+
+      assert {:ok, %Join{} = join} = Goals.create_join(valid_attrs)
+    end
+
+    test "create_join/1 with invalid data returns error changeset" do
+      assert {:error, %Ecto.Changeset{}} = Goals.create_join(@invalid_attrs)
+    end
+
+    test "update_join/2 with valid data updates the join" do
+      join = join_fixture()
+      update_attrs = %{}
+
+      assert {:ok, %Join{} = join} = Goals.update_join(join, update_attrs)
+    end
+
+    test "update_join/2 with invalid data returns error changeset" do
+      join = join_fixture()
+      assert {:error, %Ecto.Changeset{}} = Goals.update_join(join, @invalid_attrs)
+      assert join == Goals.get_join!(join.id)
+    end
+
+    test "delete_join/1 deletes the join" do
+      join = join_fixture()
+      assert {:ok, %Join{}} = Goals.delete_join(join)
+      assert_raise Ecto.NoResultsError, fn -> Goals.get_join!(join.id) end
+    end
+
+    test "change_join/1 returns a join changeset" do
+      join = join_fixture()
+      assert %Ecto.Changeset{} = Goals.change_join(join)
+    end
+  end
 end

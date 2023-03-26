@@ -41,30 +41,39 @@ defmodule PromiseWeb.Router do
     post "/", TokenController, :create
   end
 
-  scope "/api/users", PromiseWeb do
+  scope "/api", PromiseWeb do
     pipe_through :api
 
-    get "/:id", UserController, :show
-    post "/", UserController, :create
+    get "/users/:id", UserController, :show
+    post "/users", UserController, :create
   end
 
-  scope "/api/profile", PromiseWeb do
+  scope "/api", PromiseWeb do
     pipe_through [:api, :ensure_authorized]
 
-    get "/", ProfileController, :show
-    put "/", ProfileController, :update
-    delete "/", ProfileController, :delete
+    get "/profile", ProfileController, :show
+    put "/profile", ProfileController, :update
+    delete "/profile", ProfileController, :delete
   end
 
-  scope "/api/goals", PromiseWeb do
+  scope "/api", PromiseWeb do
     pipe_through [:api, :ensure_authorized]
 
-    get "/", GoalController, :index
-    post "/", GoalController, :create
+    get "/goals", GoalController, :index
+    post "/goals", GoalController, :create
 
-    get "/:id", GoalController, :show
-    put "/:id", GoalController, :update
-    delete "/:id", GoalController, :delete
+    get "/goals/:id", GoalController, :show
+    put "/goals/:id", GoalController, :update
+    delete "/goals/:id", GoalController, :delete
+  end
+
+  scope "/api", PromiseWeb do
+    pipe_through [:api, :ensure_authorized]
+
+    get "/goals/:id/joins", JoinController, :index
+
+    post "/goals/:id/join", JoinController, :create
+    delete "/goals/:id/join", JoinController, :delete
   end
 
   # Other scopes may use custom stacks.

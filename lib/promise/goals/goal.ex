@@ -1,5 +1,6 @@
 defmodule Promise.Goals.Goal do
   alias Promise.Accounts.User
+  alias Promise.Goals.Join
   use Ecto.Schema
   import Ecto.Changeset
 
@@ -9,6 +10,8 @@ defmodule Promise.Goals.Goal do
     field :title, :string
 
     belongs_to :user, User
+
+    many_to_many :user_joins, User, join_through: Join
 
     timestamps()
   end

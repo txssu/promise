@@ -22,7 +22,7 @@
 # Databaes
 
 - [x] Add goals
-- [ ] Add goal_joins
+- [x] Add goal_joins
 - [ ] Add goal_subscribers
 - [ ] Add goal_reactions
 - [ ] Add goal_posts

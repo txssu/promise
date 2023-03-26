@@ -3,7 +3,8 @@ defmodule PromiseWeb.Loaders.GenLoader do
 
   def load(conn, opts) do
     {context, fun} = Keyword.fetch!(opts, :resource)
-    resource_id = conn.params["id"]
+    param_key = Keyword.get(opts, :param_key, "id")
+    resource_id = conn.params[param_key]
 
     apply(context, fun, [resource_id])
   end

@@ -17,4 +17,18 @@ defmodule Promise.GoalsFixtures do
 
     goal
   end
+
+  @doc """
+  Generate a join.
+  """
+  def join_fixture(attrs \\ %{}) do
+    {:ok, join} =
+      attrs
+      |> Enum.into(%{
+
+      })
+      |> Promise.Goals.create_join()
+
+    join
+  end
 end
