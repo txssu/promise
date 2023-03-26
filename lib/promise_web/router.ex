@@ -76,6 +76,15 @@ defmodule PromiseWeb.Router do
     delete "/goals/:id/join", JoinController, :delete
   end
 
+  scope "/api", PromiseWeb do
+    pipe_through [:api, :ensure_authorized]
+
+    get "/goals/:id/subscriptions", SubscriptionController, :index
+
+    post "/goals/:id/subscription", SubscriptionController, :create
+    delete "/goals/:id/subscription", SubscriptionController, :delete
+  end
+
   # Other scopes may use custom stacks.
   # scope "/api", PromiseWeb do
   #   pipe_through :api

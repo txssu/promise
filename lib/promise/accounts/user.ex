@@ -1,5 +1,6 @@
 defmodule Promise.Accounts.User do
   @moduledoc false
+  alias Promise.Goals.Subscription
   alias Promise.Goals.Goal
   alias Promise.Goals.Join
   use Ecto.Schema
@@ -15,6 +16,7 @@ defmodule Promise.Accounts.User do
     has_many :goals, Goal
 
     many_to_many :goal_joins, Goal, join_through: Join
+    many_to_many :goal_subscriptions, Goal, join_through: Subscription
 
     timestamps()
   end

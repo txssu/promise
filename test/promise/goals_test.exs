@@ -108,4 +108,56 @@ defmodule Promise.GoalsTest do
       assert %Ecto.Changeset{} = Goals.change_join(join)
     end
   end
+
+  describe "goal_subscriptions" do
+    alias Promise.Goals.Subscription
+
+    import Promise.GoalsFixtures
+
+    @invalid_attrs %{}
+
+    test "list_goal_subscriptions/0 returns all goal_subscriptions" do
+      subscription = subscription_fixture()
+      assert Goals.list_goal_subscriptions() == [subscription]
+    end
+
+    test "get_subscription!/1 returns the subscription with given id" do
+      subscription = subscription_fixture()
+      assert Goals.get_subscription!(subscription.id) == subscription
+    end
+
+    test "create_subscription/1 with valid data creates a subscription" do
+      valid_attrs = %{}
+
+      assert {:ok, %Subscription{} = subscription} = Goals.create_subscription(valid_attrs)
+    end
+
+    test "create_subscription/1 with invalid data returns error changeset" do
+      assert {:error, %Ecto.Changeset{}} = Goals.create_subscription(@invalid_attrs)
+    end
+
+    test "update_subscription/2 with valid data updates the subscription" do
+      subscription = subscription_fixture()
+      update_attrs = %{}
+
+      assert {:ok, %Subscription{} = subscription} = Goals.update_subscription(subscription, update_attrs)
+    end
+
+    test "update_subscription/2 with invalid data returns error changeset" do
+      subscription = subscription_fixture()
+      assert {:error, %Ecto.Changeset{}} = Goals.update_subscription(subscription, @invalid_attrs)
+      assert subscription == Goals.get_subscription!(subscription.id)
+    end
+
+    test "delete_subscription/1 deletes the subscription" do
+      subscription = subscription_fixture()
+      assert {:ok, %Subscription{}} = Goals.delete_subscription(subscription)
+      assert_raise Ecto.NoResultsError, fn -> Goals.get_subscription!(subscription.id) end
+    end
+
+    test "change_subscription/1 returns a subscription changeset" do
+      subscription = subscription_fixture()
+      assert %Ecto.Changeset{} = Goals.change_subscription(subscription)
+    end
+  end
 end

@@ -23,7 +23,7 @@
 
 - [x] Add goals
 - [x] Add goal_joins
-- [ ] Add goal_subscribers
+- [x] Add goal_subscribers
 - [ ] Add goal_reactions
 - [ ] Add goal_posts
 

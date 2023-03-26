@@ -31,4 +31,18 @@ defmodule Promise.GoalsFixtures do
 
     join
   end
+
+  @doc """
+  Generate a subscription.
+  """
+  def subscription_fixture(attrs \\ %{}) do
+    {:ok, subscription} =
+      attrs
+      |> Enum.into(%{
+
+      })
+      |> Promise.Goals.create_subscription()
+
+    subscription
+  end
 end

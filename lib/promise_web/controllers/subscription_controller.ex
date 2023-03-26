@@ -1,9 +1,9 @@
-defmodule PromiseWeb.JoinController do
+defmodule PromiseWeb.SubscriptionController do
   use PromiseWeb, :controller
   use OpenApiSpex.ControllerSpecs
 
   alias Promise.Goals
-  alias Promise.Goals.Join
+  alias Promise.Goals.Subscription
 
   alias PromiseWeb.Loaders
 
@@ -25,7 +25,7 @@ defmodule PromiseWeb.JoinController do
   operation :update, false
 
   operation :index,
-    summary: "Joined users",
+    summary: "Users' subscriptions",
     parameters: [
       id: [
         in: :path,
@@ -35,19 +35,19 @@ defmodule PromiseWeb.JoinController do
       ]
     ],
     responses: [
-      ok: {"Users array", "application/json", Schemas.UserResponse},
+      ok: {"Users array", "application/json", Schemas.UserResponse}
     ]
 
   def index(conn, _params) do
-    goal = Goals.load_joins(conn.assigns.goal)
+    goal = Goals.load_subscriptions(conn.assigns.goal)
 
     conn
     |> put_view(json: PromiseWeb.UserJSON)
-    |> render(:index, users: goal.user_joins)
+    |> render(:index, users: goal.user_subscriptions)
   end
 
   operation :create,
-    summary: "Join goal",
+    summary: "Subscribe goal",
     parameters: [
       id: [
         in: :path,
@@ -57,19 +57,19 @@ defmodule PromiseWeb.JoinController do
       ]
     ],
     responses: [
-      no_content: "Joined"
+      no_content: "Subscribed"
     ]
 
   def create(conn, _params) do
     %{current_user: user, goal: goal} = conn.assigns
 
-    with _ <- Goals.create_join(user, goal) do
+    with _ <- Goals.create_subscription(user, goal) do
       send_resp(conn, :no_content, "")
     end
   end
 
   operation :delete,
-    summary: "Leave goal",
+    summary: "Unsubscribe goal",
     parameters: [
       id: [
         in: :path,
@@ -79,15 +79,15 @@ defmodule PromiseWeb.JoinController do
       ]
     ],
     responses: [
-      no_content: "Left"
+      no_content: "Unsubscribed"
     ]
 
   def delete(conn, _params) do
     %{current_user: user, goal: goal} = conn.assigns
 
-    join = Goals.get_user_goal_join!(user, goal)
+    subscription = Goals.get_user_goal_subscription!(user, goal)
 
-    with {:ok, %Join{}} <- Goals.delete_join(join) do
+    with {:ok, %Subscription{}} <- Goals.delete_subscription(subscription) do
       send_resp(conn, :no_content, "")
     end
   end
