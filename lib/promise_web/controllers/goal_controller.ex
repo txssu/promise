@@ -1,6 +1,5 @@
 defmodule PromiseWeb.GoalController do
   use PromiseWeb, :controller
-  use OpenApiSpex.ControllerSpecs
 
   alias Promise.Goals
   alias Promise.Goals.Goal
@@ -19,42 +18,14 @@ defmodule PromiseWeb.GoalController do
 
   action_fallback PromiseWeb.FallbackController
 
-  tags ["goals"]
-  security [%{}, %{"authorization" => ["cookieAuth"]}]
-
-  operation :index, false
-
   def index(conn, _params) do
     goals = Goals.list_goals()
     render(conn, :index, goals: goals)
   end
 
-  operation :show,
-    summary: "Get goal data",
-    parameters: [
-      id: [
-        in: :path,
-        description: "Goal ID",
-        type: :string,
-        example: "3bf8ac00-fa03-43b5-86b1-d303d71b0075"
-      ]
-    ],
-    responses: [
-      ok: {"Goal data", "application/json", Schemas.GoalResponse},
-      not_found: {"There is no this user", "application/json", Schemas.GenericError}
-    ]
-
   def show(conn, _params) do
     render(conn, :show, goal: conn.assigns.goal)
   end
-
-  operation :create,
-    summary: "Create goal",
-    request_body: {"Goal params", "application/json", Schemas.GoalRequest},
-    responses: [
-      created: {"Created goal", "application/json", Schemas.GoalResponse},
-      bad_request: {"Bad request", "application/json", Schemas.GenericError}
-    ]
 
   def create(conn, %{"goal" => goal_params}) do
     user = conn.assigns.current_user
@@ -67,13 +38,6 @@ defmodule PromiseWeb.GoalController do
     end
   end
 
-  operation :update,
-    summary: "Edit goal data",
-    request_body: {"User params", "application/json", Schemas.GoalRequest},
-    responses: [
-      ok: {"User data", "application/json", Schemas.GoalResponse}
-    ]
-
   def update(conn, %{"goal" => goal_params}) do
     goal = conn.assigns.goal
 
@@ -81,12 +45,6 @@ defmodule PromiseWeb.GoalController do
       render(conn, :show, goal: goal)
     end
   end
-
-  operation :delete,
-    summary: "Delete goal",
-    responses: [
-      no_content: "Deleted succesfully"
-    ]
 
   def delete(conn, _params) do
     goal = conn.assigns.goal

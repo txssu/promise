@@ -1,7 +1,6 @@
 defmodule PromiseWeb.TokenController do
   @moduledoc false
   use PromiseWeb, :controller
-  use OpenApiSpex.ControllerSpecs
 
   import Guardian.Plug.Keys, only: [token_key: 1]
 
@@ -14,25 +13,6 @@ defmodule PromiseWeb.TokenController do
   @token_cookie_opts [
     http_only: true
   ]
-
-  @internal_server_error_text """
-  This happens when the server fails to generate a token, \
-  this usually does not occur
-  """
-
-  tags ["tokens"]
-
-  operation :create,
-    summary: "Get token",
-    request_body: {"User params", "application/json", Schemas.UserAuthData},
-    responses: [
-      created: Schemas.TokenResponse.response(),
-      unauthorized:
-        {"Possibly wrong email or password", "application/json", Schemas.GenericError},
-      unprocessable_entity: {"Wrong data format", "application/json", Schemas.GenericError},
-      internal_server_error:
-        {@internal_server_error_text, "application/json", Schemas.GenericError}
-    ]
 
   def create(conn, params) do
     create_user_token(conn, params)

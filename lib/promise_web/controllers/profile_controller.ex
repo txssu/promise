@@ -1,6 +1,5 @@
 defmodule PromiseWeb.ProfileController do
   use PromiseWeb, :controller
-  use OpenApiSpex.ControllerSpecs
 
   import Guardian.Plug.Keys, only: [token_key: 1]
 
@@ -15,28 +14,9 @@ defmodule PromiseWeb.ProfileController do
 
   action_fallback PromiseWeb.FallbackController
 
-  tags ["profile"]
-  security [%{}, %{"authorization" => ["authorization"]}]
-
-  operation :index, false
-  operation :create, false
-
-  operation :show,
-    summary: "Get profile",
-    responses: [
-      ok: {"User data", "application/json", Schemas.UserResponse}
-    ]
-
   def show(conn, _params) do
     render(conn, :show, user: conn.assigns.current_user)
   end
-
-  operation :update,
-    summary: "Edit profile data",
-    request_body: {"User params", "application/json", Schemas.UserAuthData},
-    responses: [
-      ok: {"User data", "application/json", Schemas.UserResponse}
-    ]
 
   def update(conn, %{"user" => user_params}) do
     user = conn.assigns.current_user
@@ -45,12 +25,6 @@ defmodule PromiseWeb.ProfileController do
       render(conn, :show, user: user)
     end
   end
-
-  operation :delete,
-    summary: "Delete profile",
-    responses: [
-      no_content: "Deleted succesfully"
-    ]
 
   def delete(conn, _params) do
     user = conn.assigns.current_user

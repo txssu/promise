@@ -21,6 +21,14 @@ services:
       - ${APP_PORT:-4000}:4000
     restart: unless-stopped
 
+  swagger-ui:
+    image: swaggerapi/swagger-ui
+    ports:
+      - ${SWAGGERUI_PORT:-4001}:8080
+    volumes:
+      - ./priv/static:/usr/share/nginx/html/doc
+    environment:
+      API_URL: doc/openapi.yml
 
 volumes:
   postgres:

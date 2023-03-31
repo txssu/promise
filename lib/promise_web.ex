@@ -17,7 +17,7 @@ defmodule PromiseWeb do
   those modules here.
   """
 
-  def static_paths, do: ~w(assets fonts images favicon.ico robots.txt)
+  def static_paths, do: ~w(assets fonts images favicon.ico robots.txt openapi.yml)
 
   def router do
     quote do
@@ -44,8 +44,6 @@ defmodule PromiseWeb do
 
       import Plug.Conn
       import PromiseWeb.Gettext
-
-      alias PromiseWeb.Schemas
 
       unquote(verified_routes())
     end
@@ -103,13 +101,6 @@ defmodule PromiseWeb do
         endpoint: PromiseWeb.Endpoint,
         router: PromiseWeb.Router,
         statics: PromiseWeb.static_paths()
-    end
-  end
-
-  def openapi_schema do
-    quote do
-      alias OpenApiSpex.Schema
-      require OpenApiSpex
     end
   end
 

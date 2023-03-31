@@ -11,7 +11,6 @@ defmodule PromiseWeb.Router do
 
   pipeline :api do
     plug :accepts, ["json"]
-    plug OpenApiSpex.Plug.PutApiSpec, module: PromiseWeb.ApiSpec
   end
 
   pipeline :ensure_authorized do
@@ -26,13 +25,6 @@ defmodule PromiseWeb.Router do
 
   scope "/" do
     pipe_through :browser
-
-    get "/swaggerui", OpenApiSpex.Plug.SwaggerUI, path: "/api/openapi"
-  end
-
-  scope "/api" do
-    pipe_through :api
-    get "/openapi", OpenApiSpex.Plug.RenderSpec, []
   end
 
   scope "/api/tokens", PromiseWeb do

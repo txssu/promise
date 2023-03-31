@@ -71,6 +71,7 @@ config :promise, PromiseWeb.Endpoint,
   live_reload: [
     patterns: [
       ~r"priv/static/.*(js|css|png|jpeg|jpg|gif|svg)$",
+      ~r"priv/static/openapi.yml",
       ~r"priv/gettext/.*(po)$",
       ~r"lib/promise_web/(controllers|live|components)/.*(ex|heex)$"
     ]
@@ -91,6 +92,3 @@ config :phoenix, :plug_init_mode, :runtime
 
 # Disable swoosh api client as it is only required for production adapters.
 config :swoosh, :api_client, false
-
-# config/dev.exs
-config :open_api_spex, :cache_adapter, OpenApiSpex.Plug.NoneCache
