@@ -9,3 +9,32 @@
 #
 # We recommend using the bang functions (`insert!`, `update!`
 # and so on) as they will fail if something goes wrong.
+alias Promise.Repo
+alias Promise.Accounts.User
+
+%User{}
+|> User.registration(%{
+  first_name: "Piotr",
+  last_name: "Makarov",
+  email: "piotr.makarov@gmail.com",
+  password: "123456789"
+})
+|> Repo.insert!()
+
+%User{}
+|> User.registration(%{
+  first_name: "Евгений",
+  last_name: "Рыбин",
+  email: "z.ribin20@gmail.com",
+  password: "123456789"
+})
+|> Repo.insert!()
+
+%User{}
+|> User.registration(%{
+  first_name: "Константин",
+  last_name: "Константинопольский",
+  email: "kosta@mail.ru",
+  password: "123456789"
+})
+|> Repo.insert!()

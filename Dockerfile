@@ -18,6 +18,4 @@ ENV IN_DOCKER=true
 RUN mix deps.get
 RUN mix compile
 
-COPY scripts/docker_startup.sh .
-
-ENTRYPOINT ["./docker_startup.sh"]
+CMD ["mix", "do", "phx.server"]
