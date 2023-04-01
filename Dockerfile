@@ -3,7 +3,6 @@ FROM elixir:1.14-alpine
 # prepare build dir
 WORKDIR /app
 
-
 RUN apk add --no-cache make gcc libc-dev
 
 COPY mix.exs mix.lock ./
@@ -19,4 +18,6 @@ ENV IN_DOCKER=true
 RUN mix deps.get
 RUN mix compile
 
-CMD ["mix", "phx.server"]
+COPY scripts/docker_startup.sh .
+
+ENTRYPOINT ["./docker_startup.sh"]
