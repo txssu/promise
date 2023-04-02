@@ -14,3 +14,8 @@ After first run you need to:
 ```bash
 docker compose exec promise mix ecto.setup
 ```
+
+After changes in database you need to run migrations:
+```bash
+docker compose exec promise mix ecto.migrate
+```
