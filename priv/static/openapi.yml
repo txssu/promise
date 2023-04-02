@@ -72,7 +72,7 @@ paths:
         - users
       summary: "Get current user data"
       security:
-        - cookieAuth: []
+        - bearerAuth: []
       responses:
         "200":
           description: User data
@@ -89,7 +89,7 @@ paths:
         - users
       summary: "Edit current user data"
       security:
-        - cookieAuth: []
+        - bearerAuth: []
       requestBody:
         content:
           application/json:
@@ -126,7 +126,7 @@ paths:
         - users
       summary: "Delete user"
       security:
-        - cookieAuth: []
+        - bearerAuth: []
       responses:
         "204":
           description: User deleted
@@ -153,11 +153,13 @@ paths:
       responses:
         "201":
           description: "User authorization successfull"
-          headers:
-            Set-Cookie:
+          content:
+            application/json:
               schema:
-                type: string
-                example: guardian_promise_token=some.jwt.token; Max-Age=2419200
+                type: object
+                properties:
+                  data:
+                    $ref: "#/components/schemas/TokenResponse"
         "401":
           description: Possibly wrong email or password
           content:
@@ -178,32 +180,25 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/GenericError"
-    delete:
-      tags:
-        - tokens
-      summary: "Log out"
-      security:
-        - cookieAuth: []
-      responses:
-        "204":
-          description: User deleted
-          headers:
-            Set-Cookie:
-              schema:
-                type: string
-                example: guardian_promise_token=; Expires=Thu, 01 Jan 1970 00:00:00 GMT; Max-Age=0
 
 components:
   securitySchemes:
-    cookieAuth:
-      type: apiKey
-      in: cookie
-      name: guardian_promise_token
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
   schemas:
     UUID:
       type: string
       format: uuid
       example: 123e4567-e89b-12d3-a456-426614174000
+    TokenResponse:
+      type: object
+      properties:
+        token:
+          type: string
+          format: JWT
+          example: qwerty.asdfgh.zxcvbn
     GenericError:
       type: object
       required:
@@ -237,18 +232,18 @@ components:
                 type: string
     RegistrationError:
       allOf:
-      - $ref: "#/components/schemas/DataEditingError"
-      - type: object
-        required:
-          - errors
-        properties:
-          errors:
-            type: object
-            properties:
-              password:
-                type: array
-                items:
-                  type: string
+        - $ref: "#/components/schemas/DataEditingError"
+        - type: object
+          required:
+            - errors
+          properties:
+            errors:
+              type: object
+              properties:
+                password:
+                  type: array
+                  items:
+                    type: string
     UserBase:
       type: object
       properties:
@@ -271,7 +266,7 @@ components:
               type: string
               format: password
               minLength: 8
-              example: 5uperPassw0rd
+              example: 123456789
           required:
             - first_name
             - last_name
@@ -299,4 +294,4 @@ components:
           type: string
           format: password
           minLength: 8
-          example: 5uperPassw0rd
+          example: 123456789

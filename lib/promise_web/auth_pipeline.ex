@@ -6,8 +6,7 @@ defmodule PromiseWeb.AuthPipeline do
     error_handler: PromiseWeb.AuthErrorHandler,
     key: :promise
 
-  plug Guardian.Plug.VerifyHeader,
-    refresh_from_cookie: true
+  plug Guardian.Plug.VerifyHeader
 
   plug Guardian.Plug.EnsureAuthenticated
   plug Guardian.Plug.LoadResource
