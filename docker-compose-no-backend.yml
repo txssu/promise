@@ -1,0 +1,40 @@
+services:
+  postgres:
+    image: postgres
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_DB: promise_dev
+      PGDATA: /data/postgres
+    volumes:
+      - postgres:/data/postgres
+    ports:
+      - "${DB_PORT:-5432}:5432"
+    restart: unless-stopped
+
+  swagger-ui:
+    image: swaggerapi/swagger-ui
+    ports:
+      - ${SWAGGERUI_PORT:-4001}:8080
+    volumes:
+      - ./priv/static:/usr/share/nginx/html/doc
+    environment:
+      API_URL: doc/openapi.yml
+    restart: unless-stopped
+
+  pgadmin:
+    image: dpage/pgadmin4
+    depends_on:
+      - postgres
+    environment:
+      - PGADMIN_DEFAULT_EMAIL=admin@admin.com
+      - PGADMIN_DEFAULT_PASSWORD=root
+    ports:
+      - "${PGADMIN_PORT:-4002}:80"
+    volumes:
+      - pgadmin-data:/var/lib/pgadmin4/storage
+    restart: unless-stopped
+
+volumes:
+  postgres:
+  pgadmin-data:
