@@ -249,13 +249,18 @@ components:
       properties:
         first_name:
           type: string
+          maxLength: 20
+          pattern: "^[\\p{L}\\-']+$"
           example: Piotr
         last_name:
           type: string
+          maxLength: 20
+          pattern: "^[\\p{L}\\-']+$"
           example: Makarov
         email:
           type: string
           format: email
+          pattern: ".+@.+"
           example: piotr.makarov@gmail.com
     UserRegistrationParams:
       allOf:

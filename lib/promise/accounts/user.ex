@@ -27,22 +27,36 @@ defmodule Promise.Accounts.User do
   def changeset(user, attrs) do
     user
     |> cast(attrs, [:first_name, :last_name, :email])
-    |> validate_required([:first_name, :last_name, :email])
+    |> validate_names()
+    |> validate_email()
   end
 
   def registration(user, attrs) do
     user
     |> cast(attrs, [:first_name, :last_name, :email, :password])
-    |> validate_required([:first_name, :last_name])
+    |> validate_names()
     |> validate_email()
     |> validate_password()
     |> put_password_hash()
   end
 
+  defp validate_names(changeset) do
+    changeset
+    |> validate_required([:first_name, :last_name])
+    |> validate_name(:first_name)
+    |> validate_name(:last_name)
+  end
+
+  defp validate_name(changeset, key) do
+    changeset
+    |> validate_format(key, ~r/^[\p{L}\-']+$/u)
+    |> validate_length(key, max: 20)
+  end
+
   defp validate_email(changeset) do
     changeset
     |> validate_required([:email])
-    |> validate_format(:email, ~r/.+@.+/)
+    |> validate_format(:email, ~r/.+@.+/u)
     |> unique_constraint(:email)
   end
 
