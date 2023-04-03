@@ -42,13 +42,13 @@ defmodule Promise.Accounts.User do
 
   defp validate_names(changeset) do
     changeset
-    |> validate_required([:first_name, :last_name])
     |> validate_name(:first_name)
     |> validate_name(:last_name)
   end
 
   defp validate_name(changeset, key) do
     changeset
+    |> validate_required([key])
     |> validate_format(key, ~r/^[\p{L}\-']+$/u)
     |> validate_length(key, max: 20)
   end
