@@ -262,6 +262,16 @@ components:
           format: email
           pattern: ".+@.+"
           example: piotr.makarov@gmail.com
+        city:
+          type: string
+          pattern: "^[\\p{L}\\-']+$"
+          example: Yekaterinburg
+        bio:
+          type: string
+          description: "Attention: Cannot contains trailing or leading spaces"
+          example: >-
+            Hello, I'm 18 y.o. React programmer!
+            I love JS and all relaited stuff.
     UserRegistrationParams:
       allOf:
         - $ref: "#/components/schemas/UserBase"
@@ -288,6 +298,9 @@ components:
             - id
             - first_name
             - last_name
+            - email
+            - bio
+            - city
     AuthParams:
       type: object
       properties:
