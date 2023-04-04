@@ -3,6 +3,7 @@ info:
   title: Promise
   version: "1.0"
 servers:
+  - url: http://localhost:4000/
   - url: http://localhost/
 paths:
   /api/users:
@@ -130,18 +131,13 @@ paths:
       responses:
         "204":
           description: User deleted
-          headers:
-            Set-Cookie:
-              schema:
-                type: string
-                example: guardian_promise_token=; Expires=Thu, 01 Jan 1970 00:00:00 GMT; Max-Age=0
   /api/tokens:
     post:
       tags:
         - authorization
         - registration
         - tokens
-      summary: "Set user's token in cookie"
+      summary: "Returns user cookie"
       requestBody:
         content:
           application/json:
