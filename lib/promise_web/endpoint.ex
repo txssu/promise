@@ -21,7 +21,8 @@ defmodule PromiseWeb.Endpoint do
     at: "/",
     from: :promise,
     gzip: false,
-    only: PromiseWeb.static_paths()
+    only: PromiseWeb.static_paths(),
+    headers: %{"Access-control-Allow-Origin" => "*"}
 
   # Code reloading can be explicitly enabled under the
   # :code_reloader configuration of your endpoint.
