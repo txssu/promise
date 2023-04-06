@@ -15,7 +15,6 @@
   - [x] Enable CORS
   - [x] Add docs for paths
   - [x] Use build in guardian plugs
-- [x] Use SecretVault for storing secrets
 - [x] Add dockerfile and docker-compose for developing
 - [x] Response tokens in cookies
 

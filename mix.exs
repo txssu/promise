@@ -54,7 +54,6 @@ defmodule Promise.MixProject do
       {:guardian, "~> 2.0"},
       {:argon2_elixir, "~> 3.0"},
       {:cors_plug, "~> 3.0"},
-      {:secret_vault, "~> 1.0"},
       {:credo, "~> 1.6", only: [:dev, :test], runtime: false},
       {:dialyxir, "~> 1.0", only: [:dev], runtime: false}
     ]

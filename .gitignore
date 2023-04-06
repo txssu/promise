@@ -35,5 +35,3 @@ promise-*.tar
 npm-debug.log
 /assets/node_modules/
 
-# Ignore vscode settings
-.vscode/settings.json
