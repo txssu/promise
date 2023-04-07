@@ -36,6 +36,7 @@ defmodule PromiseWeb.Router do
   scope "/api", PromiseWeb do
     pipe_through :api
 
+    get "/users", UserController, :index
     get "/users/:id", UserController, :show
     post "/users", UserController, :create
   end

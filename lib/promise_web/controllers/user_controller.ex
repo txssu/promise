@@ -6,6 +6,12 @@ defmodule PromiseWeb.UserController do
 
   action_fallback PromiseWeb.FallbackController
 
+  def index(conn, _params) do
+    users = Accounts.list_users()
+
+    render(conn, :index, users: users)
+  end
+
   def create(conn, %{"user" => user_params}) do
     with {:ok, %User{} = user} <- Accounts.register_user(user_params) do
       conn

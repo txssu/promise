@@ -7,6 +7,22 @@ servers:
   - url: https://promise.waika28.ru
 paths:
   /api/users:
+    get:
+      tags:
+        - users
+      summary: Get list of users
+      responses:
+        "200":
+          description: Users data
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: array
+                    items:
+                      $ref: "#/components/schemas/UserResponse"
     post:
       tags:
         - users
@@ -59,7 +75,10 @@ paths:
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/UserResponse"
+                type: object
+                properties:
+                  data:
+                    $ref: "#/components/schemas/UserResponse"
         "404":
           description: There is no this user
           content:
