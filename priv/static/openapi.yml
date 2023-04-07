@@ -3,8 +3,8 @@ info:
   title: Promise
   version: "1.0"
 servers:
-  - url: https://test.promise.waika28.ru/
-  - url: https://promise.waika28.ru/
+  - url: https://test.promise.waika28.ru
+  - url: https://promise.waika28.ru
 paths:
   /api/users:
     post:
