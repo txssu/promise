@@ -13,14 +13,14 @@ defmodule PromiseWeb.ChangesetJSON do
     # You can make use of gettext to translate error messages by
     # uncommenting and adjusting the following code:
 
-    # if count = opts[:count] do
-    #   Gettext.dngettext(PromiseWeb.Gettext, "errors", msg, msg, count, opts)
-    # else
-    #   Gettext.dgettext(PromiseWeb.Gettext, "errors", msg, opts)
-    # end
+    if count = opts[:count] do
+      Gettext.dngettext(PromiseWeb.Gettext, "errors", msg, msg, count, opts)
+    else
+      Gettext.dgettext(PromiseWeb.Gettext, "errors", msg, opts)
+    end
 
-    Enum.reduce(opts, msg, fn {key, value}, acc ->
-      String.replace(acc, "%{#{key}}", fn _ -> to_string(value) end)
-    end)
+    # Enum.reduce(opts, msg, fn {key, value}, acc ->
+    #   String.replace(acc, "%{#{key}}", fn _ -> to_string(value) end)
+    # end)
   end
 end

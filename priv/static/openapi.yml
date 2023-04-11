@@ -5,6 +5,7 @@ info:
 servers:
   - url: https://test.promise.waika28.ru
   - url: https://promise.waika28.ru
+  - url: http://localhost
 paths:
   /api/users:
     get:
