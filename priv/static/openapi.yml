@@ -145,7 +145,7 @@ paths:
         - authorization
         - registration
         - tokens
-      summary: "Returns user cookie"
+      summary: "Returns user token"
       requestBody:
         content:
           application/json:
