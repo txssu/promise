@@ -23,7 +23,7 @@ paths:
                   data:
                     type: array
                     items:
-                      $ref: "#/components/schemas/UserResponse"
+                      $ref: "#/components/schemas/UserResponseData"
     post:
       tags:
         - users
@@ -33,32 +33,26 @@ paths:
         content:
           application/json:
             schema:
-              type: object
-              properties:
-                user:
-                  $ref: "#/components/schemas/UserRegistrationParams"
+              $ref: "#/components/schemas/RegistrationRequest"
       responses:
         "201":
           description: Registration complete
           content:
             application/json:
               schema:
-                type: object
-                properties:
-                  data:
-                    $ref: "#/components/schemas/UserResponse"
+                $ref: "#/components/schemas/UserResponse"
         "400":
           description: Bad request
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/GenericError"
+                $ref: "#/components/schemas/GenericErrorResponse"
         "422":
           description: Invalid data
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/RegistrationError"
+                $ref: "#/components/schemas/DataValidatingErrorResponse"
   /api/users/{id}:
     get:
       tags:
@@ -85,7 +79,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/GenericError"
+                $ref: "#/components/schemas/GenericErrorResponse"
   /api/profile:
     get:
       tags:
@@ -100,10 +94,7 @@ paths:
           content:
             application/json:
               schema:
-                type: object
-                properties:
-                  data:
-                    $ref: "#/components/schemas/UserResponse"
+                $ref: "#/components/schemas/UserResponse"
     put:
       tags:
         - profile
@@ -125,22 +116,19 @@ paths:
           content:
             application/json:
               schema:
-                type: object
-                properties:
-                  data:
-                    $ref: "#/components/schemas/UserResponse"
+                $ref: "#/components/schemas/UserResponse"
         "400":
           description: Bad request
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/GenericError"
+                $ref: "#/components/schemas/GenericErrorResponse"
         "422":
           description: Invalid data
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/DataEditingError"
+                $ref: "#/components/schemas/DataValidatingErrorResponse"
     delete:
       tags:
         - profile
@@ -162,32 +150,26 @@ paths:
         content:
           application/json:
             schema:
-              type: object
-              properties:
-                user:
-                  $ref: "#/components/schemas/AuthParams"
+              $ref: "#/components/schemas/AuthRequest"
       responses:
         "201":
           description: "User authorization successfull"
           content:
             application/json:
               schema:
-                type: object
-                properties:
-                  data:
-                    $ref: "#/components/schemas/TokenResponse"
+                $ref: "#/components/schemas/TokenResponse"
         "401":
           description: Possibly wrong email or password
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/GenericError"
+                $ref: "#/components/schemas/GenericErrorResponse"
         "422":
           description: Wrong data format
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/GenericError"
+                $ref: "#/components/schemas/GenericErrorResponse"
         "500":
           description: >
             This happens when the server fails to generate a token, this usually does not
@@ -195,7 +177,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/GenericError"
+                $ref: "#/components/schemas/GenericErrorResponse"
 
 components:
   securitySchemes:
@@ -211,11 +193,13 @@ components:
     TokenResponse:
       type: object
       properties:
-        token:
-          type: string
-          format: JWT
-          example: qwerty.asdfgh.zxcvbn
-    GenericError:
+        data:
+          properties:
+            token:
+              type: string
+              format: JWT
+              example: qwerty.asdfgh.zxcvbn
+    GenericErrorResponse:
       type: object
       required:
         - detail
@@ -225,8 +209,8 @@ components:
           example: "Bad request"
         message:
           type: string
-          example: "Email has already been taken"
-    DataEditingError:
+          example: "Some info about error"
+    DataValidatingErrorResponse:
       type: object
       required:
         - errors
@@ -234,32 +218,11 @@ components:
         errors:
           type: object
           properties:
-            first_name:
+            field_name:
               type: array
               items:
                 type: string
-            last_name:
-              type: array
-              items:
-                type: string
-            email:
-              type: array
-              items:
-                type: string
-    RegistrationError:
-      allOf:
-        - $ref: "#/components/schemas/DataEditingError"
-        - type: object
-          required:
-            - errors
-          properties:
-            errors:
-              type: object
-              properties:
-                password:
-                  type: array
-                  items:
-                    type: string
+                example: invalid format
     UserBase:
       type: object
       properties:
@@ -288,44 +251,48 @@ components:
           example: >-
             Hello, I'm 18 y.o. React programmer!
             I love JS and all relaited stuff.
-    UserRegistrationParams:
-      allOf:
-        - $ref: "#/components/schemas/UserBase"
-        - type: object
-          properties:
-            password:
-              type: string
-              format: password
-              minLength: 8
-              example: 123456789
-          required:
-            - first_name
-            - last_name
-            - email
-            - password
-    UserResponse:
+    UserResponseData:
       allOf:
         - $ref: "#/components/schemas/UserBase"
         - type: object
           properties:
             id:
               $ref: "#/components/schemas/UUID"
-          required:
-            - id
-            - first_name
-            - last_name
-            - email
-            - bio
-            - city
-    AuthParams:
+    RegistrationRequest:
       type: object
       properties:
-        email:
-          type: string
-          format: email
-          example: piotr.makarov@gmail.com
-        password:
-          type: string
-          format: password
-          minLength: 8
-          example: 123456789
+        user:
+          allOf:
+            - $ref: "#/components/schemas/UserBase"
+            - type: object
+              properties:
+                password:
+                  type: string
+                  format: password
+                  minLength: 8
+                  example: 123456789
+              required:
+                - first_name
+                - last_name
+                - email
+                - password
+    UserResponse:
+      type: object
+      properties:
+        data:
+          $ref: "#/components/schemas/UserResponseData"
+    AuthRequest:
+      type: object
+      properties:
+        user:
+          type: object
+          properties:
+            email:
+              type: string
+              format: email
+              example: piotr.makarov@gmail.com
+            password:
+              type: string
+              format: password
+              minLength: 8
+              example: 123456789
