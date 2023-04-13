@@ -24,6 +24,8 @@ paths:
                     type: array
                     items:
                       $ref: "#/components/schemas/UserInResponseData"
+        default:
+          $ref: "#/components/responses/Default"
     post:
       tags:
         - users
@@ -41,18 +43,10 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/UserResponse"
-        "400":
-          description: Bad request
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/GenericErrorResponse"
         "422":
-          description: Invalid data
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/DataValidatingErrorResponse"
+          $ref: "#/components/responses/ValidationError"
+        default:
+          $ref: "#/components/responses/Default"
   /api/users/{id}:
     get:
       tags:
@@ -74,12 +68,8 @@ paths:
                 properties:
                   data:
                     $ref: "#/components/schemas/UserResponse"
-        "404":
-          description: There is no this user
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/GenericErrorResponse"
+        default:
+          $ref: "#/components/responses/Default"
   /api/profile:
     get:
       tags:
@@ -95,6 +85,8 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/UserResponse"
+        default:
+          $ref: "#/components/responses/Default"
     put:
       tags:
         - profile
@@ -117,18 +109,10 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/UserResponse"
-        "400":
-          description: Bad request
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/GenericErrorResponse"
         "422":
-          description: Invalid data
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/DataValidatingErrorResponse"
+          $ref: "#/components/responses/ValidationError"
+        default:
+          $ref: "#/components/responses/Default"
     delete:
       tags:
         - profile
@@ -139,6 +123,8 @@ paths:
       responses:
         "204":
           description: User deleted
+        default:
+          $ref: "#/components/responses/Default"
   /api/tokens:
     post:
       tags:
@@ -158,26 +144,8 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/TokenResponse"
-        "401":
-          description: Possibly wrong email or password
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/GenericErrorResponse"
-        "422":
-          description: Wrong data format
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/GenericErrorResponse"
-        "500":
-          description: >
-            This happens when the server fails to generate a token, this usually does not
-            occur
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/GenericErrorResponse"
+        default:
+          $ref: "#/components/responses/Default"
   /api/goals:
     get:
       tags:
@@ -188,6 +156,8 @@ paths:
       responses:
         "200":
           description: "Returned list of goals"
+        default:
+          $ref: "#/components/responses/Default"
     post:
       tags:
         - goals
@@ -206,18 +176,10 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/GoalResponse"
-        "400":
-          description: Bad request
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/GenericErrorResponse"
         "422":
-          description: Invalid data
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/DataValidatingErrorResponse"
+          $ref: "#/components/responses/ValidationError"
+        default:
+          $ref: "#/components/responses/Default"
   /api/goals/{id}:
     get:
       tags:
@@ -238,6 +200,8 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/GoalResponse"
+        default:
+          $ref: "#/components/responses/Default"
     put:
       tags:
         - goals
@@ -265,18 +229,10 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/GoalResponse"
-        "400":
-          description: Bad request
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/GenericErrorResponse"
         "422":
-          description: Invalid data
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/DataValidatingErrorResponse"
+          $ref: "#/components/responses/ValidationError"
+        default:
+          $ref: "#/components/responses/Default"
     delete:
       tags:
         - goals
@@ -292,6 +248,8 @@ paths:
       responses:
         "204":
           description: Goal deleted
+        default:
+          $ref: "#/components/responses/Default"
   /api/goals/{goal_id}/posts:
     get:
       tags:
@@ -308,6 +266,8 @@ paths:
       responses:
         "200":
           description: "Returned list of posts"
+        default:
+          $ref: "#/components/responses/Default"
     post:
       tags:
         - goal_posts
@@ -332,18 +292,10 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/GoalPostRequest"
-        "400":
-          description: Bad request
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/GenericErrorResponse"
         "422":
-          description: Invalid data
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/DataValidatingErrorResponse"
+          $ref: "#/components/responses/ValidationError"
+        default:
+          $ref: "#/components/responses/Default"
   /api/goals/{goal_id}/posts/{post_id}:
     get:
       tags:
@@ -369,6 +321,8 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/GoalPostResponse"
+        default:
+          $ref: "#/components/responses/Default"
     put:
       tags:
         - goal_posts
@@ -401,18 +355,10 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/GoalPostResponse"
-        "400":
-          description: Bad request
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/GenericErrorResponse"
         "422":
-          description: Invalid data
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/DataValidatingErrorResponse"
+          $ref: "#/components/responses/ValidationError"
+        default:
+          $ref: "#/components/responses/Default"
     delete:
       tags:
         - goal_posts
@@ -433,12 +379,27 @@ paths:
       responses:
         "204":
           description: Post deleted
+        default:
+          $ref: "#/components/responses/Default"
 components:
   securitySchemes:
     bearerAuth:
       type: http
       scheme: bearer
       bearerFormat: JWT
+  responses:
+    Default:
+      description: Default error
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/GenericErrorResponse'
+    ValidationError:
+      description: Invalid data
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/DataValidatingErrorResponse"
   schemas:
     UUID:
       type: string
