@@ -11,7 +11,7 @@ paths:
     get:
       tags:
         - users
-      summary: Get list of users
+      summary: Index users
       responses:
         "200":
           description: Users data
@@ -29,7 +29,7 @@ paths:
     post:
       tags:
         - users
-        - registration
+        - authorization
       summary: Register user
       requestBody:
         content:
@@ -51,7 +51,7 @@ paths:
     get:
       tags:
         - users
-      summary: Show user data
+      summary: Show user
       parameters:
         - name: id
           in: path
@@ -75,7 +75,7 @@ paths:
       tags:
         - profile
         - users
-      summary: "Get current user data"
+      summary: Show current user
       security:
         - bearerAuth: []
       responses:
@@ -91,7 +91,7 @@ paths:
       tags:
         - profile
         - users
-      summary: "Edit current user data"
+      summary: Edit current user
       security:
         - bearerAuth: []
       requestBody:
@@ -117,7 +117,7 @@ paths:
       tags:
         - profile
         - users
-      summary: "Delete user"
+      summary: Delete current user
       security:
         - bearerAuth: []
       responses:
@@ -129,9 +129,7 @@ paths:
     post:
       tags:
         - authorization
-        - registration
-        - tokens
-      summary: "Returns user token"
+      summary: Create user token
       requestBody:
         content:
           application/json:
@@ -150,7 +148,7 @@ paths:
     get:
       tags:
         - goals
-      summary: "Get all of the current user goals"
+      summary: Index current user's goals
       security:
         - bearerAuth: []
       responses:
@@ -161,7 +159,7 @@ paths:
     post:
       tags:
         - goals
-      summary: "Create new goal"
+      summary: Create goal
       security:
         - bearerAuth: []
       requestBody:
@@ -184,7 +182,7 @@ paths:
     get:
       tags:
         - goals
-      summary: "Get goal data"
+      summary: Show goal
       security:
         - bearerAuth: []
       parameters:
@@ -205,7 +203,7 @@ paths:
     put:
       tags:
         - goals
-      summary: "Edit goal data"
+      summary: Edit goal
       security:
         - bearerAuth: []
       parameters:
@@ -224,7 +222,7 @@ paths:
                   $ref: "#/components/schemas/GoalBase"
       responses:
         "200":
-          description: User data
+          description: Goal data
           content:
             application/json:
               schema:
@@ -236,7 +234,7 @@ paths:
     delete:
       tags:
         - goals
-      summary: "Delete goal"
+      summary: Delete goal
       security:
         - bearerAuth: []
       parameters:
@@ -254,7 +252,7 @@ paths:
     get:
       tags:
         - goal_posts
-      summary: "Get all of the given goal posts"
+      summary: Index goal's posts
       security:
         - bearerAuth: []
       parameters:
@@ -271,7 +269,7 @@ paths:
     post:
       tags:
         - goal_posts
-      summary: "Create new post"
+      summary: Create post
       security:
         - bearerAuth: []
       parameters:
@@ -300,7 +298,7 @@ paths:
     get:
       tags:
         - goal_posts
-      summary: "Get post data"
+      summary: Show post
       security:
         - bearerAuth: []
       parameters:
@@ -316,7 +314,7 @@ paths:
             $ref: "#/components/schemas/UUID"
       responses:
         "200":
-          description: Goal data
+          description: Post data
           content:
             application/json:
               schema:
@@ -326,7 +324,7 @@ paths:
     put:
       tags:
         - goal_posts
-      summary: "Edit post data"
+      summary: Edit post
       security:
         - bearerAuth: []
       parameters:
@@ -362,7 +360,7 @@ paths:
     delete:
       tags:
         - goal_posts
-      summary: "Delete Post"
+      summary: Delete post
       security:
         - bearerAuth: []
       parameters:
@@ -393,7 +391,7 @@ components:
       content:
         application/json:
           schema:
-            $ref: '#/components/schemas/GenericErrorResponse'
+            $ref: "#/components/schemas/GenericErrorResponse"
     ValidationError:
       description: Invalid data
       content:
@@ -561,4 +559,3 @@ components:
                     - description: Related goal
                     - $ref: "#/components/schemas/UUID"
             - $ref: "#/components/schemas/GoalPostBase"
-
