@@ -292,7 +292,147 @@ paths:
       responses:
         "204":
           description: Goal deleted
-
+  /api/goals/{goal_id}/posts:
+    get:
+      tags:
+        - goal_posts
+      summary: "Get all of the given goal posts"
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: goal_id
+          in: path
+          required: true
+          schema:
+            $ref: "#/components/schemas/UUID"
+      responses:
+        "200":
+          description: "Returned list of posts"
+    post:
+      tags:
+        - goal_posts
+      summary: "Create new post"
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: goal_id
+          in: path
+          required: true
+          schema:
+            $ref: "#/components/schemas/UUID"
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/GoalPostRequest"
+      responses:
+        "201":
+          description: Post created
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/GoalPostRequest"
+        "400":
+          description: Bad request
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/GenericErrorResponse"
+        "422":
+          description: Invalid data
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/DataValidatingErrorResponse"
+  /api/goals/{goal_id}/posts/{post_id}:
+    get:
+      tags:
+        - goal_posts
+      summary: "Get post data"
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: goal_id
+          in: path
+          required: true
+          schema:
+            $ref: "#/components/schemas/UUID"
+        - name: post_id
+          in: path
+          required: true
+          schema:
+            $ref: "#/components/schemas/UUID"
+      responses:
+        "200":
+          description: Goal data
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/GoalPostResponse"
+    put:
+      tags:
+        - goal_posts
+      summary: "Edit post data"
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: goal_id
+          in: path
+          required: true
+          schema:
+            $ref: "#/components/schemas/UUID"
+        - name: post_id
+          in: path
+          required: true
+          schema:
+            $ref: "#/components/schemas/UUID"
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                post:
+                  $ref: "#/components/schemas/GoalPostBase"
+      responses:
+        "200":
+          description: Post data
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/GoalPostResponse"
+        "400":
+          description: Bad request
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/GenericErrorResponse"
+        "422":
+          description: Invalid data
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/DataValidatingErrorResponse"
+    delete:
+      tags:
+        - goal_posts
+      summary: "Delete Post"
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: goal_id
+          in: path
+          required: true
+          schema:
+            $ref: "#/components/schemas/UUID"
+        - name: post_id
+          in: path
+          required: true
+          schema:
+            $ref: "#/components/schemas/UUID"
+      responses:
+        "204":
+          description: Post deleted
 components:
   securitySchemes:
     bearerAuth:
@@ -435,4 +575,29 @@ components:
                     - description: Owner of the goal
                     - $ref: "#/components/schemas/UUID"
             - $ref: "#/components/schemas/GoalBase"
+    GoalPostBase:
+      type: object
+      properties:
+        text:
+          type: string
+          maxLength: 2000
+    GoalPostRequest:
+      type: object
+      properties:
+        post:
+          $ref: "#/components/schemas/GoalPostBase"
+    GoalPostResponse:
+      type: object
+      properties:
+        data:
+          allOf:
+            - type: object
+              properties:
+                id:
+                  $ref: "#/components/schemas/UUID"
+                goal_id:
+                  allOf:
+                    - description: Related goal
+                    - $ref: "#/components/schemas/UUID"
+            - $ref: "#/components/schemas/GoalPostBase"
 

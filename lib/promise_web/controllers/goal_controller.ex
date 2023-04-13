@@ -14,7 +14,9 @@ defmodule PromiseWeb.GoalController do
        [key: :goal, loader: Loaders.GenLoader, resource: {Goals, :get_goal!}]
        when action in [:show, :update, :delete]
 
-  plug :owner_only when action in [:update, :delete]
+  plug PromiseWeb.Plugs.AccessRules,
+    [type: :owner_only]
+    when action in [:update, :delete]
 
   action_fallback PromiseWeb.FallbackController
 
@@ -51,20 +53,6 @@ defmodule PromiseWeb.GoalController do
 
     with {:ok, %Goal{}} <- Goals.delete_goal(goal) do
       send_resp(conn, :no_content, "")
-    end
-  end
-
-  def owner_only(conn, _opts) do
-    %{current_user: user, goal: goal} = conn.assigns
-
-    if goal.user_id == user.id do
-      conn
-    else
-      conn
-      |> put_status(:forbidden)
-      |> put_view(json: PromiseWeb.ErrorJSON)
-      |> render("403.json", message: "You are not the owner of the resource")
-      |> halt()
     end
   end
 end
