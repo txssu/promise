@@ -23,7 +23,7 @@ paths:
                   data:
                     type: array
                     items:
-                      $ref: "#/components/schemas/UserResponseData"
+                      $ref: "#/components/schemas/UserInResponseData"
     post:
       tags:
         - users
@@ -304,15 +304,6 @@ components:
       type: string
       format: uuid
       example: 123e4567-e89b-12d3-a456-426614174000
-    TokenResponse:
-      type: object
-      properties:
-        data:
-          properties:
-            token:
-              type: string
-              format: JWT
-              example: qwerty.asdfgh.zxcvbn
     GenericErrorResponse:
       type: object
       required:
@@ -365,7 +356,7 @@ components:
           example: >-
             Hello, I'm 18 y.o. React programmer!
             I love JS and all relaited stuff.
-    UserResponseData:
+    UserInResponseData:
       allOf:
         - $ref: "#/components/schemas/UserBase"
         - type: object
@@ -394,7 +385,7 @@ components:
       type: object
       properties:
         data:
-          $ref: "#/components/schemas/UserResponseData"
+          $ref: "#/components/schemas/UserInResponseData"
     AuthRequest:
       type: object
       properties:
@@ -410,6 +401,15 @@ components:
               format: password
               minLength: 8
               example: 123456789
+    TokenResponse:
+      type: object
+      properties:
+        data:
+          properties:
+            token:
+              type: string
+              format: JWT
+              example: qwerty.asdfgh.zxcvbn
     GoalBase:
       type: object
       properties:
