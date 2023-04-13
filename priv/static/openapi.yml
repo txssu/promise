@@ -178,6 +178,120 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/GenericErrorResponse"
+  /api/goals:
+    get:
+      tags:
+        - goals
+      summary: "Get all of the current user goals"
+      security:
+        - bearerAuth: []
+      responses:
+        "200":
+          description: "Returned list of goals"
+    post:
+      tags:
+        - goals
+      summary: "Create new goal"
+      security:
+        - bearerAuth: []
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/GoalRequest"
+      responses:
+        "201":
+          description: Goal created
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/GoalResponse"
+        "400":
+          description: Bad request
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/GenericErrorResponse"
+        "422":
+          description: Invalid data
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/DataValidatingErrorResponse"
+  /api/goals/{id}:
+    get:
+      tags:
+        - goals
+      summary: "Get goal data"
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            $ref: "#/components/schemas/UUID"
+      responses:
+        "200":
+          description: Goal data
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/GoalResponse"
+    put:
+      tags:
+        - goals
+      summary: "Edit goal data"
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            $ref: "#/components/schemas/UUID"
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                goal:
+                  $ref: "#/components/schemas/GoalBase"
+      responses:
+        "200":
+          description: User data
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/GoalResponse"
+        "400":
+          description: Bad request
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/GenericErrorResponse"
+        "422":
+          description: Invalid data
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/DataValidatingErrorResponse"
+    delete:
+      tags:
+        - goals
+      summary: "Delete goal"
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            $ref: "#/components/schemas/UUID"
+      responses:
+        "204":
+          description: Goal deleted
 
 components:
   securitySchemes:
@@ -296,3 +410,29 @@ components:
               format: password
               minLength: 8
               example: 123456789
+    GoalBase:
+      type: object
+      properties:
+        title:
+          type: string
+          example: "I want to become a senior react programmer"
+    GoalRequest:
+      type: object
+      properties:
+        goal:
+          $ref: "#/components/schemas/GoalBase"
+    GoalResponse:
+      type: object
+      properties:
+        data:
+          allOf:
+            - type: object
+              properties:
+                id:
+                  $ref: "#/components/schemas/UUID"
+                user_id:
+                  allOf:
+                    - description: Owner of the goal
+                    - $ref: "#/components/schemas/UUID"
+            - $ref: "#/components/schemas/GoalBase"
+
