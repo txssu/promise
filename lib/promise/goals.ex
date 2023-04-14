@@ -38,6 +38,11 @@ defmodule Promise.Goals do
   def get_goal!(id), do: Repo.get!(Goal, id)
   def get_goal(id), do: Repo.get(Goal, id)
 
+  def preload_goals(user) do
+    user
+    |> Repo.preload(:goals)
+  end
+
   def get_goal_with_posts!(id) do
     query = from g in Goal,
             where: g.id == ^id,

@@ -12,10 +12,12 @@ defmodule PromiseWeb.Plugs.AccessRules do
     apply(__MODULE__, rule, [conn, opts])
   end
 
-  def owner_only(conn, _opts) do
-    %{current_user: user, goal: goal} = conn.assigns
+  def owner_only(conn, opts) do
+    resource_key = Keyword.fetch!(opts, :resource_key)
 
-    if goal.user_id == user.id do
+    %{:current_user => user, ^resource_key => resource} = conn.assigns
+
+    if user.id == resource.user_id do
       conn
     else
       conn

@@ -8,20 +8,22 @@ defmodule PromiseWeb.GoalController do
 
   plug PromiseWeb.Plugs.ResourceLoader,
        [key: :current_user, loader: Loaders.CurrentUserLoader]
-       when action in [:create, :update, :delete]
 
   plug PromiseWeb.Plugs.ResourceLoader,
        [key: :goal, loader: Loaders.GenLoader, resource: {Goals, :get_goal!}]
        when action in [:show, :update, :delete]
 
   plug PromiseWeb.Plugs.AccessRules,
-    [type: :owner_only]
-    when action in [:update, :delete]
+    [rule: :owner_only, resource_key: :goal]
+    when action in [:show, :update, :delete]
 
   action_fallback PromiseWeb.FallbackController
 
   def index(conn, _params) do
-    goals = Goals.list_goals()
+    user =
+      conn.assigns.current_user
+      |> Goals.preload_goals()
+    goals = user.goals
     render(conn, :index, goals: goals)
   end
 

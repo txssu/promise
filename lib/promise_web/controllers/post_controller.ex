@@ -8,7 +8,6 @@ defmodule PromiseWeb.PostController do
 
   plug PromiseWeb.Plugs.ResourceLoader,
        [key: :current_user, loader: Loaders.CurrentUserLoader]
-       when action in [:create, :update, :delete]
 
   plug PromiseWeb.Plugs.ResourceLoader,
        [key: :goal, loader: Loaders.GenLoader, param_key: "goal_id",  resource: {Goals, :get_goal_with_posts!}]
@@ -23,8 +22,7 @@ defmodule PromiseWeb.PostController do
        when action in [:show, :update, :delete]
 
   plug PromiseWeb.Plugs.AccessRules,
-       [rule: :owner_only]
-       when action in [:update, :delete]
+       [rule: :owner_only, resource_key: :goal]
 
   action_fallback PromiseWeb.FallbackController
 
