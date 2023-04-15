@@ -26,5 +26,6 @@ defmodule Promise.Goals.Goal do
     goal
     |> cast(attrs, [:title])
     |> validate_required([:title])
+    |> validate_length(:title, max: 255)
   end
 end
