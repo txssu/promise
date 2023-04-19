@@ -515,6 +515,11 @@ components:
         title:
           type: string
           example: "I want to become a senior react programmer"
+        deadline:
+          type: string
+          format: date-time
+          example: 2024-06-23T23:00
+          description: Should be after now
     GoalRequest:
       type: object
       properties:

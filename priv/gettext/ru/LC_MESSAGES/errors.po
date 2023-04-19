@@ -109,3 +109,8 @@ msgstr "должен быть больше или равен %{number}"
 
 msgid "must be equal to %{number}"
 msgstr "должен быть равен %{number}"
+
+#: lib/promise/goals/goal.ex:41
+#, elixir-autogen, elixir-format, fuzzy
+msgid "should be after %{after}."
+msgstr "должна быть после %{after}"

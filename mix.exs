@@ -54,6 +54,8 @@ defmodule Promise.MixProject do
       {:guardian, "~> 2.0"},
       {:argon2_elixir, "~> 3.0"},
       {:cors_plug, "~> 3.0"},
+      {:ecto_commons, "~> 0.3.3"},
+      {:tesla, "~> 1.4"}, # ex-phone-number dep
       {:credo, "~> 1.6", only: [:dev, :test], runtime: false},
       {:dialyxir, "~> 1.0", only: [:dev], runtime: false}
     ]
