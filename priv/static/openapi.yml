@@ -538,6 +538,10 @@ components:
                   allOf:
                     - description: Owner of the goal
                     - $ref: "#/components/schemas/UUID"
+                inserted_at:
+                  type: string
+                  format: date-time
+                  example: 2024-06-23T23:00
             - $ref: "#/components/schemas/GoalBase"
     GoalPostBase:
       type: object

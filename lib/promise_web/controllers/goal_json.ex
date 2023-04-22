@@ -20,7 +20,8 @@ defmodule PromiseWeb.GoalJSON do
       id: goal.id,
       title: goal.title,
       deadline: goal.deadline,
-      user_id: goal.user_id
+      user_id: goal.user_id,
+      inserted_at: goal.inserted_at
     }
   end
 end
