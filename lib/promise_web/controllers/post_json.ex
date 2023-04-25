@@ -18,7 +18,8 @@ defmodule PromiseWeb.PostJSON do
   defp data(%Post{} = post) do
     %{
       id: post.id,
-      text: post.text
+      text: post.text,
+      inserted_at: post.inserted_at
     }
   end
 end
