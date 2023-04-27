@@ -14,10 +14,11 @@ defmodule PromiseWeb.Plugs.AccessRules do
 
   def owner_only(conn, opts) do
     resource_key = Keyword.fetch!(opts, :resource_key)
+    can_be_public? = Keyword.get(opts, :can_be_public, false)
 
     %{:current_user => user, ^resource_key => resource} = conn.assigns
 
-    if user.id == resource.user_id do
+    if user.id == resource.user_id or (can_be_public? and resource.is_public) do
       conn
     else
       conn

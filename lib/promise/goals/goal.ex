@@ -15,6 +15,7 @@ defmodule Promise.Goals.Goal do
   schema "goals" do
     field :title, :string
     field :deadline, :utc_datetime
+    field :is_public, :boolean
 
     belongs_to :user, User
 
@@ -29,9 +30,9 @@ defmodule Promise.Goals.Goal do
   @doc false
   def changeset(goal, attrs) do
     goal
-    |> cast(attrs, [:title, :deadline])
+    |> cast(attrs, [:title, :deadline, :is_public])
     |> validate_deadline()
-    |> validate_required([:title])
+    |> validate_required([:title, :is_public])
     |> validate_length(:title, max: 255)
   end
 

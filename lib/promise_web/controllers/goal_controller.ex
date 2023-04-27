@@ -14,7 +14,7 @@ defmodule PromiseWeb.GoalController do
        when action in [:show, :update, :delete]
 
   plug PromiseWeb.Plugs.AccessRules,
-    [rule: :owner_only, resource_key: :goal]
+    [rule: :owner_only, resource_key: :goal, can_be_public: true]
     when action in [:show, :update, :delete]
 
   action_fallback PromiseWeb.FallbackController

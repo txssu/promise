@@ -520,6 +520,9 @@ components:
           format: date-time
           example: 2024-06-23T23:00
           description: Should be after now
+        is_public:
+          type: boolean
+          example: true
     GoalRequest:
       type: object
       properties:
