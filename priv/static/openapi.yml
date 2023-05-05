@@ -178,6 +178,21 @@ paths:
           $ref: "#/components/responses/ValidationError"
         default:
           $ref: "#/components/responses/Default"
+  /api/goals/public:
+    get:
+      tags:
+        - goals
+      summary: A feed like list of all pulblic goals
+      security:
+        - bearerAuth: []
+      parameters:
+        - $ref: '#/components/parameters/offsetParam'
+        - $ref: '#/components/parameters/limitParam'
+      responses:
+        "200":
+          description: "Returned list of goals"
+        default:
+          $ref: "#/components/responses/Default"
   /api/goals/{id}:
     get:
       tags:
@@ -385,6 +400,22 @@ components:
       type: http
       scheme: bearer
       bearerFormat: JWT
+  parameters:
+    offsetParam:
+      in: query
+      name: offset
+      required: false
+      schema:
+        type: integer
+        minimum: 0
+    limitParam:
+      in: query
+      name: limit
+      required: false
+      schema:
+        type: integer
+        minimum: 0
+        maximum: 100
   responses:
     Default:
       description: Default error

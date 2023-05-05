@@ -53,6 +53,7 @@ defmodule PromiseWeb.Router do
     pipe_through [:api, :ensure_authorized]
 
     get "/goals", GoalController, :index
+    get "/goals/public", GoalController, :index_public
     post "/goals", GoalController, :create
 
     get "/goals/:id", GoalController, :show

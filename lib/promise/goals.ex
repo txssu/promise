@@ -17,8 +17,10 @@ defmodule Promise.Goals do
       [%Goal{}, ...]
 
   """
-  def list_goals do
-    Repo.all(Goal)
+  def list_goals(params \\ %{}) do
+    Goal
+    |> where([g], g.is_public == true)
+    |> Flop.validate_and_run(params, for: Goal)
   end
 
   @doc """

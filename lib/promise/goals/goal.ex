@@ -10,6 +10,18 @@ defmodule Promise.Goals.Goal do
 
   require PromiseWeb.Gettext
 
+  @derive {
+    Flop.Schema,
+    filterable: [],
+    sortable: [:inserted_at],
+    default_limit: 20,
+    max_limit: 100,
+    default_order: %{
+      order_by: [:inserted_at],
+      order_directions: [:desc]
+    }
+  }
+
   @primary_key {:id, :binary_id, autogenerate: true}
   @foreign_key_type :binary_id
   schema "goals" do

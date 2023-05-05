@@ -21,6 +21,10 @@ defmodule PromiseWeb.FallbackController do
     |> render(:unauthorized)
   end
 
+  def call(conn, {:error, %Flop.Meta{}}) do
+    send_resp(conn, :unprocessable_entity, "")
+  end
+
   # This clause is an example of how to handle resources that cannot be found.
   def call(conn, {:error, :not_found}) do
     conn

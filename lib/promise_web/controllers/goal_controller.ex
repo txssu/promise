@@ -27,6 +27,12 @@ defmodule PromiseWeb.GoalController do
     render(conn, :index, goals: goals)
   end
 
+  def index_public(conn, params) do
+    with  {:ok, {goals, _meta}}  <- Goals.list_goals(params) do
+      render(conn, :index, goals: goals)
+    end
+  end
+
   def show(conn, _params) do
     render(conn, :show, goal: conn.assigns.goal)
   end
