@@ -4,12 +4,19 @@ defmodule PromiseWeb.UserController do
   alias Promise.Accounts
   alias Promise.Accounts.User
 
-  action_fallback PromiseWeb.FallbackController
+  action_fallback(PromiseWeb.FallbackController)
+
+  def index(conn, %{"name" => name} = params) do
+    with {:ok, {users, _meta}} <- Accounts.search_by_name(name, params) do
+      render(conn, :index, users: users)
+    end
+  end
 
   def index(conn, _params) do
-    users = Accounts.list_users()
-
-    render(conn, :index, users: users)
+    conn
+    |> put_status(:unprocessable_entity)
+    |> put_view(json: PromiseWeb.ErrorJSON)
+    |> render(:unprocessable_entity, message: "name parameter is required")
   end
 
   def create(conn, %{"user" => user_params}) do

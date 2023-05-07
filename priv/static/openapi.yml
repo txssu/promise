@@ -11,7 +11,17 @@ paths:
     get:
       tags:
         - users
-      summary: Index users
+      summary: Search user by name
+      security:
+        - bearerAuth: []
+      parameters:
+        - in: query
+          name: name
+          required: true
+          schema:
+            type: string
+        - $ref: '#/components/parameters/offsetParam'
+        - $ref: '#/components/parameters/limitParam'
       responses:
         "200":
           description: Users data

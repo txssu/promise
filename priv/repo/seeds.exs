@@ -32,6 +32,15 @@ alias Promise.Accounts.User
 
 %User{}
 |> User.registration(%{
+  first_name: "Eugene",
+  last_name: "Fisher",
+  email: "g.fisher20@gmail.com",
+  password: "123456789"
+})
+|> Repo.insert!()
+
+%User{}
+|> User.registration(%{
   first_name: "Константин",
   last_name: "Константинопольский",
   email: "kosta@mail.ru",

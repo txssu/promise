@@ -119,4 +119,10 @@ defmodule Promise.Accounts do
   def change_user(%User{} = user, attrs \\ %{}) do
     User.changeset(user, attrs)
   end
+
+  def search_by_name(name, params \\ %{}) do
+    User
+    |> order_by([u], desc: fragment("SIMILARITY(? || ' ' || ?, ?)", u.first_name, u.last_name, ^name))
+    |> Flop.validate_and_run(params, for: User)
+  end
 end
