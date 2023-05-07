@@ -5,6 +5,8 @@ defmodule Promise.Goals.Join do
   alias Promise.Accounts.User
   alias Promise.Goals.Goal
 
+  require PromiseWeb.Gettext
+
   @derive {
     Flop.Schema,
     filterable: [],
@@ -20,6 +22,9 @@ defmodule Promise.Goals.Join do
   @primary_key {:id, :binary_id, autogenerate: true}
   @foreign_key_type :binary_id
   schema "goal_joins" do
+    field :deadline, :utc_datetime
+    field :is_public, :boolean
+
     belongs_to :user, User
     belongs_to :goal, Goal
 
@@ -29,7 +34,9 @@ defmodule Promise.Goals.Join do
   @doc false
   def changeset(join, attrs) do
     join
-    |> cast(attrs, [])
-    |> validate_required([])
+    |> cast(attrs, [:deadline, :is_public])
+    |> unique_constraint([:user_id, :goal_id], message: PromiseWeb.Gettext.dgettext("errors", "user has already been joined"))
+    |> Promise.Goals.Goal.validate_deadline()
+    |> validate_required([:is_public])
   end
 end

@@ -425,7 +425,7 @@ paths:
   /api/goals/{goal_id}/joins:
     get:
       tags:
-        - joins
+        - goal_joins
       summary: Goal's joins
       security:
         - bearerAuth: []
@@ -441,7 +441,7 @@ paths:
   /api/goals/{goal_id}/join:
     get:
       tags:
-        - joins
+        - goal_joins
       summary: Join info
       security:
         - bearerAuth: []
@@ -456,7 +456,7 @@ paths:
           $ref: "#/components/responses/Default"
     post:
       tags:
-        - joins
+        - goal_joins
       summary: Join the goal
       security:
         - bearerAuth: []
@@ -466,12 +466,17 @@ paths:
           required: true
           schema:
             $ref: "#/components/schemas/UUID"
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/GoalJoinRequest"
       responses:
         default:
           $ref: "#/components/responses/Default"
     delete:
       tags:
-        - joins
+        - goal_joins
       summary: Leave the goal
       security:
         - bearerAuth: []
@@ -691,12 +696,35 @@ components:
                   format: date-time
                   example: 2024-06-23T23:00
             - $ref: "#/components/schemas/GoalPostBase"
-    GoalJoinResponse:
+    GoalJoinBase:
       type: object
       properties:
-        user_id:
-          $ref: "#/components/schemas/UUID"
-        inserted_at:
+        deadline:
           type: string
           format: date-time
           example: 2024-06-23T23:00
+          description: Should be after now
+        is_public:
+          type: boolean
+          example: true
+    GoalJoinRequest:
+      type: object
+      properties:
+        join:
+          $ref: "#/components/schemas/GoalJoinBase"
+    GoalJoinResponse:
+      type: object
+      properties:
+        data:
+          allOf:
+            - type: object
+              properties:
+                id:
+                  $ref: "#/components/schemas/UUID"
+                user_id:
+                  $ref: "#/components/schemas/UUID"
+                inserted_at:
+                  type: string
+                  format: date-time
+                  example: 2024-06-23T23:00
+            - $ref: "#/components/schemas/GoalJoinBase"

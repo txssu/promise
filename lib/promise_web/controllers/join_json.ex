@@ -18,6 +18,8 @@ defmodule PromiseWeb.JoinJSON do
   defp data(%Join{} = join) do
     %{
       user_id: join.user_id,
+      deadline: join.deadline,
+      is_public: join.is_public,
       inserted_at: join.inserted_at
     }
   end

@@ -185,13 +185,14 @@ defmodule Promise.Goals do
       {:error, %Ecto.Changeset{}}
 
   """
-  def create_join(user, goal, _attrs \\ %{}) do
+  def create_join(user, goal, attrs \\ %{}) do
     user = Repo.preload(user, :goal_joins)
 
-    user
-    |> Ecto.Changeset.change()
-    |> Ecto.Changeset.put_assoc(:goal_joins, [goal | user.goal_joins])
-    |> Repo.update!()
+    %Join{}
+    |> Join.changeset(attrs)
+    |> Ecto.Changeset.put_assoc(:user, user)
+    |> Ecto.Changeset.put_assoc(:goal, goal)
+    |> Repo.insert()
   end
 
   @doc """

@@ -31,16 +31,16 @@ defmodule PromiseWeb.JoinController do
   def show(conn, _params) do
     %{current_user: user, goal: goal} = conn.assigns
 
-    join = Goals.get_user_goal_join!(user, goal)
+    {join} = Goals.get_user_goal_join!(user, goal)
 
     render(conn, :show, join: join)
   end
 
-  def create(conn, _params) do
+  def create(conn, %{"join" => join_params}) do
     %{current_user: user, goal: goal} = conn.assigns
 
-    with _ <- Goals.create_join(user, goal) do
-      send_resp(conn, :no_content, "")
+    with {:ok, %Join{} = join} <- Goals.create_join(user, goal, join_params) do
+      render(conn, :show, join: join)
     end
   end
 
