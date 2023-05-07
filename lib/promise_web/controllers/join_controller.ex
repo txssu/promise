@@ -31,7 +31,7 @@ defmodule PromiseWeb.JoinController do
   def show(conn, _params) do
     %{current_user: user, goal: goal} = conn.assigns
 
-    {join} = Goals.get_user_goal_join!(user, goal)
+    join = Goals.get_user_goal_join!(user, goal)
 
     render(conn, :show, join: join)
   end
