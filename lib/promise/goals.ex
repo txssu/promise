@@ -186,8 +186,9 @@ defmodule Promise.Goals do
 
   """
   def create_join(user, goal, _attrs \\ %{}) do
+    user = Repo.preload(user, :goal_joins)
+
     user
-    |> Repo.preload(:goal_joins)
     |> Ecto.Changeset.change()
     |> Ecto.Changeset.put_assoc(:goal_joins, [goal | user.goal_joins])
     |> Repo.update!()
