@@ -7,8 +7,9 @@ defmodule PromiseWeb.UserController do
   action_fallback(PromiseWeb.FallbackController)
 
   def index(conn, %{"name" => name} = params) do
-    with {:ok, {users, _meta}} <- Accounts.search_by_name(name, params) do
-      render(conn, :index, users: users)
+    with {:ok, {users, meta}} <- Accounts.search_by_name(name, params) do
+      IO.inspect(meta)
+      render(conn, :index, users: users, total_count: meta.total_count)
     end
   end
 

@@ -4,6 +4,10 @@ defmodule PromiseWeb.GoalJSON do
   @doc """
   Renders a list of goals.
   """
+  def index(%{goals: goals, total_count: total_count}) do
+    %{total_count: total_count, data: for(goal <- goals, do: data(goal))}
+  end
+
   def index(%{goals: goals}) do
     %{data: for(goal <- goals, do: data(goal))}
   end
