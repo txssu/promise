@@ -33,7 +33,7 @@ paths:
                   data:
                     type: array
                     items:
-                      $ref: "#/components/schemas/UserInResponseData"
+                      $ref: "#/components/schemas/UserResponse"
         default:
           $ref: "#/components/responses/Default"
     post:
@@ -163,7 +163,16 @@ paths:
         - bearerAuth: []
       responses:
         "200":
-          description: "Returned list of goals"
+          description: Goals data
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: array
+                    items:
+                      $ref: "#/components/schemas/GoalResponse"
         default:
           $ref: "#/components/responses/Default"
     post:
@@ -200,7 +209,16 @@ paths:
         - $ref: '#/components/parameters/limitParam'
       responses:
         "200":
-          description: "Returned list of goals"
+          description: Goals data
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: array
+                    items:
+                      $ref: "#/components/schemas/GoalResponse"
         default:
           $ref: "#/components/responses/Default"
   /api/goals/{id}:
@@ -496,7 +514,7 @@ components:
           example: >-
             Hello, I'm 18 y.o. React programmer!
             I love JS and all relaited stuff.
-    UserInResponseData:
+    UserResponse:
       allOf:
         - $ref: "#/components/schemas/UserBase"
         - type: object
@@ -521,11 +539,6 @@ components:
                 - last_name
                 - email
                 - password
-    UserResponse:
-      type: object
-      properties:
-        data:
-          $ref: "#/components/schemas/UserInResponseData"
     AuthRequest:
       type: object
       properties:
