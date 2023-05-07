@@ -189,7 +189,7 @@ defmodule Promise.Goals do
     user
     |> Repo.preload(:goal_joins)
     |> Ecto.Changeset.change()
-    |> Ecto.Changeset.put_assoc(:goal_joins, [goal])
+    |> Ecto.Changeset.put_assoc(:goal_joins, [goal | user.goal_joins])
     |> Repo.update!()
   end
 
