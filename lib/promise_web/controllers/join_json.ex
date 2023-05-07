@@ -4,8 +4,8 @@ defmodule PromiseWeb.JoinJSON do
   @doc """
   Renders a list of goal_joins.
   """
-  def index(%{goal_joins: goal_joins}) do
-    %{data: for(join <- goal_joins, do: data(join))}
+  def index(%{goal_joins: goal_joins, total_count: total_count}) do
+    %{total_count: total_count, data: for(join <- goal_joins, do: data(join))}
   end
 
   @doc """
@@ -17,8 +17,8 @@ defmodule PromiseWeb.JoinJSON do
 
   defp data(%Join{} = join) do
     %{
-      id: join.id,
-      user_id: join.user_id
+      user_id: join.user_id,
+      inserted_at: join.inserted_at
     }
   end
 end

@@ -422,6 +422,68 @@ paths:
           description: Post deleted
         default:
           $ref: "#/components/responses/Default"
+  /api/goals/{goal_id}/joins:
+    get:
+      tags:
+        - joins
+      summary: Goal's joins
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: goal_id
+          in: path
+          required: true
+          schema:
+            $ref: "#/components/schemas/UUID"
+      responses:
+        default:
+          $ref: "#/components/responses/Default"
+  /api/goals/{goal_id}/join:
+    get:
+      tags:
+        - joins
+      summary: Join info
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: goal_id
+          in: path
+          required: true
+          schema:
+            $ref: "#/components/schemas/UUID"
+      responses:
+        default:
+          $ref: "#/components/responses/Default"
+    post:
+      tags:
+        - joins
+      summary: Join the goal
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: goal_id
+          in: path
+          required: true
+          schema:
+            $ref: "#/components/schemas/UUID"
+      responses:
+        default:
+          $ref: "#/components/responses/Default"
+    delete:
+      tags:
+        - joins
+      summary: Leave the goal
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: goal_id
+          in: path
+          required: true
+          schema:
+            $ref: "#/components/schemas/UUID"
+      responses:
+        default:
+          $ref: "#/components/responses/Default"
 components:
   securitySchemes:
     bearerAuth:
@@ -629,3 +691,12 @@ components:
                   format: date-time
                   example: 2024-06-23T23:00
             - $ref: "#/components/schemas/GoalPostBase"
+    GoalJoinResponse:
+      type: object
+      properties:
+        user_id:
+          $ref: "#/components/schemas/UUID"
+        inserted_at:
+          type: string
+          format: date-time
+          example: 2024-06-23T23:00

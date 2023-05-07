@@ -119,15 +119,22 @@ defmodule Promise.Goals do
     Goal.changeset(goal, attrs)
   end
 
+  alias Promise.Goals.Join
+
   def load_joins(%Goal{} = goal) do
     Repo.preload(goal, :user_joins)
+  end
+
+  def get_goal_joins(%Goal{} = goal, params \\ %{}) do
+    Join
+    |> where([j], j.goal_id == ^goal.id)
+    |> Flop.validate_and_run(params)
   end
 
   def load_subscriptions(%Goal{} = goal) do
     Repo.preload(goal, :user_subscriptions)
   end
 
-  alias Promise.Goals.Join
 
   @doc """
   Returns the list of goal_joins.

@@ -15,14 +15,25 @@ defmodule PromiseWeb.JoinController do
     loader: Loaders.GenLoader,
     resource: {Goals, :get_goal!}
 
+  plug PromiseWeb.Plugs.AccessRules,
+    [rule: :owner_only, resource_key: :goal, can_be_public: true]
+    when action in [:show, :update, :delete]
+
   action_fallback PromiseWeb.FallbackController
 
   def index(conn, _params) do
-    goal = Goals.load_joins(conn.assigns.goal)
+    goal = conn.assigns.goal
+    with  {:ok, {goal_joins, meta}}  <- Goals.get_goal_joins(goal) do
+      render(conn, :index, goal_joins: goal_joins, total_count: meta.total_count)
+    end
+  end
 
-    conn
-    |> put_view(json: PromiseWeb.UserJSON)
-    |> render(:index, users: goal.user_joins)
+  def show(conn, _params) do
+    %{current_user: user, goal: goal} = conn.assigns
+
+    join = Goals.get_user_goal_join!(user, goal)
+
+    render(conn, :show, join: join)
   end
 
   def create(conn, _params) do

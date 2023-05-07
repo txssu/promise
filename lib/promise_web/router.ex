@@ -72,14 +72,15 @@ defmodule PromiseWeb.Router do
     delete "/posts/:id", PostController, :delete
   end
 
-  # scope "/api", PromiseWeb do
-  #   pipe_through [:api, :ensure_authorized]
+  scope "/api", PromiseWeb do
+    pipe_through [:api, :ensure_authorized]
 
-  #   get "/goals/:id/joins", JoinController, :index
+    get "/goals/:id/joins", JoinController, :index
 
-  #   post "/goals/:id/join", JoinController, :create
-  #   delete "/goals/:id/join", JoinController, :delete
-  # end
+    get "/goals/:id/join", JoinController, :show
+    post "/goals/:id/join", JoinController, :create
+    delete "/goals/:id/join", JoinController, :delete
+  end
 
   # scope "/api", PromiseWeb do
   #   pipe_through [:api, :ensure_authorized]
