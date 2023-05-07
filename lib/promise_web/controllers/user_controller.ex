@@ -16,7 +16,7 @@ defmodule PromiseWeb.UserController do
     conn
     |> put_status(:unprocessable_entity)
     |> put_view(json: PromiseWeb.ErrorJSON)
-    |> render(:unprocessable_entity, message: "name parameter is required")
+    |> render(:unprocessable_entity, message: "parameter name is required")
   end
 
   def create(conn, %{"user" => user_params}) do
