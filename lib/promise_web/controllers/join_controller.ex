@@ -15,9 +15,9 @@ defmodule PromiseWeb.JoinController do
     loader: Loaders.GenLoader,
     resource: {Goals, :get_goal!}
 
-  plug PromiseWeb.Plugs.AccessRules,
-    [rule: :owner_only, resource_key: :goal, can_be_public: true]
-    when action in [:show, :update, :delete]
+  # plug PromiseWeb.Plugs.AccessRules,
+  #   [rule: :owner_only, resource_key: :goal, can_be_public: true]
+  #   when action in [:show, :delete]
 
   action_fallback PromiseWeb.FallbackController
 
