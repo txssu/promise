@@ -25,6 +25,26 @@ defmodule PromiseWeb.UserControllerTest do
     {:ok, conn: put_req_header(conn, "accept", "application/json")}
   end
 
+  describe "unauthorized" do
+    test "can't get", %{conn: conn} do
+      conn = get(conn, ~p"/api/profile")
+
+      assert response(conn, 401)
+    end
+
+    test "can't edit", %{conn: conn} do
+      conn = put(conn, ~p"/api/profile")
+
+      assert response(conn, 401)
+    end
+
+    test "can't delete", %{conn: conn} do
+      conn = delete(conn, ~p"/api/profile")
+
+      assert response(conn, 401)
+    end
+  end
+
   describe "show user" do
     setup [:create_user_and_auth]
 

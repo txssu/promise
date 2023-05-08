@@ -17,6 +17,10 @@ defmodule PromiseWeb.UserControllerTest do
     password: "short"
   }
 
+  setup %{conn: conn} do
+    {:ok, conn: put_req_header(conn, "accept", "application/json")}
+  end
+
   describe "register user" do
     test "renders user when data is valid", %{conn: conn} do
       conn = post(conn, ~p"/api/users", user: @create_attrs)
@@ -45,8 +49,20 @@ defmodule PromiseWeb.UserControllerTest do
     end
   end
 
-  setup %{conn: conn} do
-    {:ok, conn: put_req_header(conn, "accept", "application/json")}
+  describe "unauthorized" do
+    test "can't get any user", %{conn: conn} do
+      user = user_fixture()
+
+      conn = get(conn, ~p"/api/users/#{user}")
+
+      assert response(conn, 401)
+    end
+
+    test "can't search", %{conn: conn} do
+      conn = get(conn, ~p"/api/users", name: "someName")
+
+      assert response(conn, 401)
+    end
   end
 
   describe "show" do
