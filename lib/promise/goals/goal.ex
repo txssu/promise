@@ -29,6 +29,8 @@ defmodule Promise.Goals.Goal do
     field :deadline, :utc_datetime
     field :is_public, :boolean
 
+    field :is_joined, :boolean, virtual: true
+
     belongs_to :user, User
 
     many_to_many :user_joins, User, join_through: Join

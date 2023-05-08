@@ -23,6 +23,14 @@ defmodule Promise.Goals do
     |> Flop.validate_and_run(params, for: Goal)
   end
 
+  def list_goals_for_user(user, params \\ %{}) do
+    Goal
+    |> where([g], g.is_public == true)
+    |> join(:left, [g], u in assoc(g, :user_joins))
+    |> select_merge([g, u], %{is_joined: ^user.id == u.id})
+    |> Flop.validate_and_run(params, for: Goal)
+  end
+
   @doc """
   Gets a single goal.
 

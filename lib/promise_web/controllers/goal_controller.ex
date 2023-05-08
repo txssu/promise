@@ -28,7 +28,8 @@ defmodule PromiseWeb.GoalController do
   end
 
   def index_public(conn, params) do
-    with  {:ok, {goals, meta}}  <- Goals.list_goals(params) do
+    user = conn.assigns.current_user
+    with  {:ok, {goals, meta}}  <- Goals.list_goals_for_user(user, params) do
       render(conn, :index, goals: goals, total_count: meta.total_count)
     end
   end
