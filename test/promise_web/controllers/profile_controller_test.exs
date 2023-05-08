@@ -28,9 +28,16 @@ defmodule PromiseWeb.UserControllerTest do
   describe "show user" do
     setup [:create_user_and_auth]
 
-    test "renders user when data is valid", %{conn: conn, user: %User{id: id}} do
+    test "renders user", %{conn: conn, user: %User{id: id}} do
       conn = get(conn, ~p"/api/profile")
-      assert %{"id" => ^id} = json_response(conn, 200)["data"]
+      assert %{
+        "id" => ^id,
+        "first_name" => _,
+        "last_name" => _,
+        "email" => _,
+        "bio" => _,
+        "city" => _,
+        } = json_response(conn, 200)["data"]
     end
   end
 

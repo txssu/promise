@@ -24,7 +24,7 @@ defmodule PromiseWeb.UserController do
       conn
       |> put_status(:created)
       |> put_resp_header("location", ~p"/api/profile")
-      |> render(:show, user: user)
+      |> render(:show_full, user: user)
     end
   end
 

@@ -15,14 +15,14 @@ defmodule PromiseWeb.ProfileController do
   action_fallback PromiseWeb.FallbackController
 
   def show(conn, _params) do
-    render(conn, :show, user: conn.assigns.current_user)
+    render(conn, :show_full, user: conn.assigns.current_user)
   end
 
   def update(conn, %{"user" => user_params}) do
     user = conn.assigns.current_user
 
     with {:ok, %User{} = user} <- Accounts.update_user(user, user_params) do
-      render(conn, :show, user: user)
+      render(conn, :show_full, user: user)
     end
   end
 

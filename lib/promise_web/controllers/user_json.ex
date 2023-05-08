@@ -16,7 +16,21 @@ defmodule PromiseWeb.UserJSON do
     %{data: data(user)}
   end
 
+  def show_full(%{user: user}) do
+    %{data: data_full(user)}
+  end
+
   defp data(%User{} = user) do
+    %{
+      id: user.id,
+      first_name: user.first_name,
+      last_name: user.last_name,
+      bio: user.bio,
+      city: user.city
+    }
+  end
+
+  defp data_full(%User{} = user) do
     %{
       id: user.id,
       first_name: user.first_name,

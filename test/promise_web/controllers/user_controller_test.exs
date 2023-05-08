@@ -24,12 +24,14 @@ defmodule PromiseWeb.UserControllerTest do
       assert %{"id" => id} = json_response(conn, 201)["data"]
 
       conn = get(conn, ~p"/api/users/#{id}")
+      assert response(conn, 401)
 
+      conn = get(conn, ~p"/api/profile")
       assert response(conn, 401)
 
       conn = conn
         |> auth_user(@create_attrs)
-        |> get(~p"/api/users/#{id}")
+        |> get(~p"/api/profile")
 
       assert %{
                "id" => ^id,
@@ -45,6 +47,17 @@ defmodule PromiseWeb.UserControllerTest do
 
   setup %{conn: conn} do
     {:ok, conn: put_req_header(conn, "accept", "application/json")}
+  end
+
+  describe "show" do
+    setup [:create_user_and_auth]
+
+    test "hides user email", %{conn: conn} do
+      user = user_fixture()
+      conn = get(conn, ~p"/api/users/#{user}")
+
+      refute is_map_key(json_response(conn, 200)["data"], "email")
+    end
   end
 
   describe "search" do
