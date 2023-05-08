@@ -8,7 +8,6 @@ defmodule PromiseWeb.UserController do
 
   def index(conn, %{"name" => name} = params) do
     with {:ok, {users, meta}} <- Accounts.search_by_name(name, params) do
-      IO.inspect(meta)
       render(conn, :index, users: users, total_count: meta.total_count)
     end
   end

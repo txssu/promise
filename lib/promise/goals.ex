@@ -135,7 +135,6 @@ defmodule Promise.Goals do
     Repo.preload(goal, :user_subscriptions)
   end
 
-
   @doc """
   Returns the list of goal_joins.
 

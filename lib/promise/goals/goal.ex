@@ -1,8 +1,8 @@
 defmodule Promise.Goals.Goal do
   alias Promise.Accounts.User
   alias Promise.Goals.Join
-  alias Promise.Goals.Subscription
   alias Promise.Goals.Post
+  alias Promise.Goals.Subscription
 
   use Ecto.Schema
   import Ecto.Changeset

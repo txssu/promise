@@ -36,7 +36,7 @@ defmodule Promise.Goals.Join do
     join
     |> cast(attrs, [:deadline, :is_public])
     |> unique_constraint([:user_id, :goal_id], message: PromiseWeb.Gettext.dgettext("errors", "user has already been joined"))
-    |> Promise.Goals.Goal.validate_deadline()
+    |> Goal.validate_deadline()
     |> validate_required([:is_public])
   end
 end
