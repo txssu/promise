@@ -24,11 +24,15 @@ defmodule Promise.Goals do
   end
 
   def list_goals_for_user(user, params \\ %{}) do
-    Goal
+    flop_response = Goal
     |> where([g], g.is_public == true)
-    |> join(:left, [g], u in assoc(g, :user_joins))
-    |> select_merge([g, u], %{is_joined: ^user.id == u.id})
-    |> Flop.validate_and_run(params, for: Goal)
+    |> preload([g], [:user_joins])
+    |> Flop.validate_and_run(params)
+
+    case flop_response do
+      {:ok, {goals, meta}} -> {:ok, {Enum.map(goals, &populate_is_joined(&1, user)), meta}}
+      err -> err
+    end
   end
 
   @doc """
@@ -59,6 +63,18 @@ defmodule Promise.Goals do
             preload: [:posts]
 
     Repo.one!(query)
+  end
+
+  def get_goal_for_user(id, user) do
+    Goal
+    |> where([g], g.id == ^id)
+    |> preload([g], [:user_joins])
+    |> Repo.one!()
+    |> populate_is_joined(user)
+  end
+
+  defp populate_is_joined(goal, user) do
+    %{goal | is_joined: user in goal.user_joins}
   end
 
   @doc """

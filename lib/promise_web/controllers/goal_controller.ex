@@ -34,8 +34,10 @@ defmodule PromiseWeb.GoalController do
     end
   end
 
-  def show(conn, _params) do
-    render(conn, :show, goal: conn.assigns.goal)
+  def show(conn, %{"id" => id}) do
+    user = conn.assigns.current_user
+    goal = Goals.get_goal_for_user(id, user)
+    render(conn, :show, goal: goal)
   end
 
   def create(conn, %{"goal" => goal_params}) do
