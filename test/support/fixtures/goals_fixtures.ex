@@ -7,13 +7,14 @@ defmodule Promise.GoalsFixtures do
   @doc """
   Generate a goal.
   """
-  def goal_fixture(attrs \\ %{}) do
-    {:ok, goal} =
-      attrs
-      |> Enum.into(%{
-        title: "some title"
-      })
-      |> Promise.Goals.create_goal()
+  def goal_fixture(user, attrs \\ %{}) do
+    attrs = Enum.into(attrs, %{
+      title: "some title",
+      deadline: ~U[2050-01-01 00:00:00.00Z],
+      is_public: true
+    })
+
+    {:ok, goal} = Promise.Goals.create_goal(user, attrs)
 
     goal
   end
@@ -24,9 +25,7 @@ defmodule Promise.GoalsFixtures do
   def join_fixture(attrs \\ %{}) do
     {:ok, join} =
       attrs
-      |> Enum.into(%{
-
-      })
+      |> Enum.into(%{})
       |> Promise.Goals.create_join()
 
     join
@@ -38,9 +37,7 @@ defmodule Promise.GoalsFixtures do
   def subscription_fixture(attrs \\ %{}) do
     {:ok, subscription} =
       attrs
-      |> Enum.into(%{
-
-      })
+      |> Enum.into(%{})
       |> Promise.Goals.create_subscription()
 
     subscription

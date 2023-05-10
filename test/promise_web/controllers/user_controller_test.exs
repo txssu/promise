@@ -2,6 +2,7 @@ defmodule PromiseWeb.UserControllerTest do
   use PromiseWeb.ConnCase
 
   import Promise.AccountsFixtures
+  import Promise.AuthHelper
 
   @create_attrs %{
     first_name: "some-first-name",
@@ -119,11 +120,5 @@ defmodule PromiseWeb.UserControllerTest do
 
       assert %{"id" => ^search_user_id} = List.first(response["data"])
     end
-  end
-
-  defp create_user_and_auth(%{conn: conn}) do
-    user = user_fixture()
-    conn = auth_user_by_password(conn, user)
-    %{user: user, conn: conn}
   end
 end
