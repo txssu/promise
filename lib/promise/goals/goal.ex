@@ -53,6 +53,6 @@ defmodule Promise.Goals.Goal do
   def validate_deadline(changeset) do
     changeset
     |> validate_required([:deadline])
-    |> validate_datetime(:deadline, after: :utc_now, message: PromiseWeb.Gettext.dgettext("errors", "should be after %{after}."))
+    |> validate_datetime(:deadline, after: :utc_now, message: PromiseWeb.Gettext.dgettext("errors", "must be in the future"))
   end
 end

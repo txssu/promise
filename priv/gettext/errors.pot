@@ -108,12 +108,12 @@ msgstr ""
 msgid "must be equal to %{number}"
 msgstr ""
 
-#: lib/promise/goals/goal.ex:56
-#, elixir-autogen, elixir-format
-msgid "should be after %{after}."
-msgstr ""
-
 #: lib/promise/goals/join.ex:38
 #, elixir-autogen, elixir-format
 msgid "user has already been joined"
+msgstr ""
+
+#: lib/promise/goals/goal.ex:56
+#, elixir-autogen, elixir-format
+msgid "must be in the future"
 msgstr ""
