@@ -110,7 +110,12 @@ msgstr "должен быть больше или равен %{number}"
 msgid "must be equal to %{number}"
 msgstr "должен быть равен %{number}"
 
-#: lib/promise/goals/goal.ex:41
+#: lib/promise/goals/goal.ex:56
 #, elixir-autogen, elixir-format, fuzzy
 msgid "should be after %{after}."
 msgstr "должна быть после %{after}"
+
+#: lib/promise/goals/join.ex:38
+#, elixir-autogen, elixir-format
+msgid "user has already been joined"
+msgstr "пользователь уже присоединился"
