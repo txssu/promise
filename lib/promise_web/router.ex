@@ -1,30 +1,12 @@
 defmodule PromiseWeb.Router do
   use PromiseWeb, :router
 
-  pipeline :browser do
-    plug :accepts, ["html"]
-    plug :fetch_session
-    plug :fetch_live_flash
-    plug :put_root_layout, {PromiseWeb.Layouts, :root}
-    plug :protect_from_forgery
-  end
-
   pipeline :api do
     plug :accepts, ["json"]
   end
 
   pipeline :ensure_authorized do
     plug PromiseWeb.AuthPipeline, key: :promise
-  end
-
-  scope "/", PromiseWeb do
-    pipe_through :browser
-
-    get "/", PageController, :home
-  end
-
-  scope "/" do
-    pipe_through :browser
   end
 
   scope "/api/tokens", PromiseWeb do
@@ -83,21 +65,6 @@ defmodule PromiseWeb.Router do
     delete "/goals/:id/join", JoinController, :delete
   end
 
-  # scope "/api", PromiseWeb do
-  #   pipe_through [:api, :ensure_authorized]
-
-  #   get "/goals/:id/subscriptions", SubscriptionController, :index
-
-  #   post "/goals/:id/subscription", SubscriptionController, :create
-  #   delete "/goals/:id/subscription", SubscriptionController, :delete
-  # end
-
-  # Other scopes may use custom stacks.
-  # scope "/api", PromiseWeb do
-  #   pipe_through :api
-  # end
-
-  # Enable LiveDashboard and Swoosh mailbox preview in development
   if Application.compile_env(:promise, :dev_routes) do
     # If you want to use the LiveDashboard in production, you should put
     # it behind authentication and allow only admins to access it.
@@ -105,6 +72,14 @@ defmodule PromiseWeb.Router do
     # you can use Plug.BasicAuth to set up some basic authentication
     # as long as you are also using SSL (which you should anyway).
     import Phoenix.LiveDashboard.Router
+
+    pipeline :browser do
+      plug :accepts, ["html"]
+      plug :fetch_session
+      plug :fetch_live_flash
+      plug :put_root_layout, {PromiseWeb.Layouts, :root}
+      plug :protect_from_forgery
+    end
 
     scope "/dev" do
       pipe_through :browser
