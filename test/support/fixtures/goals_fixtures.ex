@@ -8,11 +8,12 @@ defmodule Promise.GoalsFixtures do
   Generate a goal.
   """
   def goal_fixture(user, attrs \\ %{}) do
-    attrs = Enum.into(attrs, %{
-      title: "some title",
-      deadline: ~U[2050-01-01 00:00:00.00Z],
-      is_public: true
-    })
+    attrs =
+      Enum.into(attrs, %{
+        title: "some title",
+        deadline: ~U[2050-01-01 00:00:00.00Z],
+        is_public: true
+      })
 
     {:ok, goal} = Promise.Goals.create_goal(user, attrs)
 
@@ -23,10 +24,11 @@ defmodule Promise.GoalsFixtures do
   Generate a join.
   """
   def join_fixture(user, goal, attrs \\ %{}) do
-    attrs = Enum.into(attrs, %{
-      deadline: ~U[2050-01-01 00:00:00.00Z],
-      is_public: true
-    })
+    attrs =
+      Enum.into(attrs, %{
+        deadline: ~U[2050-01-01 00:00:00.00Z],
+        is_public: true
+      })
 
     {:ok, join} = Promise.Goals.create_join(user, goal, attrs)
 
@@ -34,22 +36,11 @@ defmodule Promise.GoalsFixtures do
   end
 
   @doc """
-  Generate a subscription.
-  """
-  def subscription_fixture(attrs \\ %{}) do
-    {:ok, subscription} =
-      attrs
-      |> Enum.into(%{})
-      |> Promise.Goals.create_subscription()
-
-    subscription
-  end
-
-  @doc """
   Generate a post.
   """
   def post_fixture(goal, attrs \\ %{}) do
-      attrs = Enum.into(attrs, %{
+    attrs =
+      Enum.into(attrs, %{
         text: "some text"
       })
 

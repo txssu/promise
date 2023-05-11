@@ -13,6 +13,7 @@ defmodule Promise.AccountsFixtures do
   """
   def user_fixture(attrs \\ %{}) do
     n = :rand.uniform(1_000_000)
+
     {:ok, user} =
       attrs
       |> Enum.into(%{

@@ -23,7 +23,8 @@ defmodule PromiseWeb.JoinController do
 
   def index(conn, _params) do
     goal = conn.assigns.goal
-    with  {:ok, {goal_joins, meta}}  <- Goals.get_goal_joins(goal) do
+
+    with {:ok, {goal_joins, meta}} <- Goals.get_goal_joins(goal) do
       render(conn, :index, goal_joins: goal_joins, total_count: meta.total_count)
     end
   end

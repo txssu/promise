@@ -6,23 +6,31 @@ defmodule PromiseWeb.PostController do
 
   alias PromiseWeb.Loaders
 
-  plug PromiseWeb.Plugs.ResourceLoader,
-       [key: :current_user, loader: Loaders.CurrentUserLoader]
+  plug PromiseWeb.Plugs.ResourceLoader, key: :current_user, loader: Loaders.CurrentUserLoader
 
   plug PromiseWeb.Plugs.ResourceLoader,
-       [key: :goal, loader: Loaders.GenLoader, param_key: "goal_id",  resource: {Goals, :get_goal_with_posts!}]
+       [
+         key: :goal,
+         loader: Loaders.GenLoader,
+         param_key: "goal_id",
+         resource: {Goals, :get_goal_with_posts!}
+       ]
        when action in [:index]
 
   plug PromiseWeb.Plugs.ResourceLoader,
-       [key: :goal, loader: Loaders.GenLoader, param_key: "goal_id",  resource: {Goals, :get_goal!}]
+       [
+         key: :goal,
+         loader: Loaders.GenLoader,
+         param_key: "goal_id",
+         resource: {Goals, :get_goal!}
+       ]
        when action in [:create, :show, :update, :delete]
 
   plug PromiseWeb.Plugs.ResourceLoader,
        [key: :post, loader: Loaders.GenLoader, resource: {Goals, :get_post!}]
        when action in [:show, :update, :delete]
 
-  plug PromiseWeb.Plugs.AccessRules,
-       [rule: :owner_only, resource_key: :goal]
+  plug PromiseWeb.Plugs.AccessRules, rule: :owner_only, resource_key: :goal
 
   action_fallback PromiseWeb.FallbackController
 

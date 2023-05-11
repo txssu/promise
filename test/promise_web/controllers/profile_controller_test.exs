@@ -50,14 +50,15 @@ defmodule PromiseWeb.ProfileControllerTest do
 
     test "renders user", %{conn: conn, user: %User{id: id}} do
       conn = get(conn, ~p"/api/profile")
+
       assert %{
-        "id" => ^id,
-        "first_name" => _,
-        "last_name" => _,
-        "email" => _,
-        "bio" => _,
-        "city" => _,
-        } = json_response(conn, 200)["data"]
+               "id" => ^id,
+               "first_name" => _,
+               "last_name" => _,
+               "email" => _,
+               "bio" => _,
+               "city" => _
+             } = json_response(conn, 200)["data"]
     end
   end
 
@@ -71,11 +72,12 @@ defmodule PromiseWeb.ProfileControllerTest do
       conn = get(conn, ~p"/api/profile")
 
       assert %{
-            "first_name" => "newfirstname",
-            "last_name" => "newlastname",
-            "email" => "some@updated.email",
-            "bio" => "Some bio info",
-            "city" => "London" } = json_response(conn, 200)["data"]
+               "first_name" => "newfirstname",
+               "last_name" => "newlastname",
+               "email" => "some@updated.email",
+               "bio" => "Some bio info",
+               "city" => "London"
+             } = json_response(conn, 200)["data"]
     end
 
     test "renders errors when data is invalid", %{conn: conn} do

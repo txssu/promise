@@ -61,7 +61,7 @@ defmodule PromiseWeb.PostControllerTest do
       conn = post(conn, ~p"/api/goals/#{goal}/posts", post: @create_attrs)
       assert %{"id" => id} = json_response(conn, 201)["data"]
 
-      conn = get(conn,~p"/api/goals/#{goal}/posts/#{id}")
+      conn = get(conn, ~p"/api/goals/#{goal}/posts/#{id}")
 
       assert %{
                "id" => ^id,

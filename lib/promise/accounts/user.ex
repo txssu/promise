@@ -8,10 +8,7 @@ defmodule Promise.Accounts.User do
 
   @derive {
     Flop.Schema,
-    filterable: [],
-    sortable: [:inserted_at],
-    default_limit: 5,
-    max_limit: 20
+    filterable: [], sortable: [:inserted_at], default_limit: 5, max_limit: 20
   }
 
   @basic_keys [

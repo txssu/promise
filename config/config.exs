@@ -66,8 +66,7 @@ config :promise, Promise.Guardian,
   issuer: "promise",
   secret_key: "Secret key. You can use `mix guardian.gen.secret` to get one"
 
-config :promise, PromiseWeb.Gettext,
-  default_locale: "ru"
+config :promise, PromiseWeb.Gettext, default_locale: "ru"
 
 config :flop,
   repo: Promise.Repo

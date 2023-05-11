@@ -122,7 +122,9 @@ defmodule Promise.Accounts do
 
   def search_by_name(name, params \\ %{}) do
     User
-    |> order_by([u], desc: fragment("SIMILARITY(? || ' ' || ?, ?)", u.first_name, u.last_name, ^name))
+    |> order_by([u],
+      desc: fragment("SIMILARITY(? || ' ' || ?, ?)", u.first_name, u.last_name, ^name)
+    )
     |> Flop.validate_and_run(params, for: User)
   end
 end

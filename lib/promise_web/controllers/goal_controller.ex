@@ -6,16 +6,15 @@ defmodule PromiseWeb.GoalController do
 
   alias PromiseWeb.Loaders
 
-  plug PromiseWeb.Plugs.ResourceLoader,
-       [key: :current_user, loader: Loaders.CurrentUserLoader]
+  plug PromiseWeb.Plugs.ResourceLoader, key: :current_user, loader: Loaders.CurrentUserLoader
 
   plug PromiseWeb.Plugs.ResourceLoader,
        [key: :goal, loader: Loaders.GenLoader, resource: {Goals, :get_goal!}]
        when action in [:show, :update, :delete]
 
   plug PromiseWeb.Plugs.AccessRules,
-    [rule: :owner_only, resource_key: :goal, can_be_public: true]
-    when action in [:show, :update, :delete]
+       [rule: :owner_only, resource_key: :goal, can_be_public: true]
+       when action in [:show, :update, :delete]
 
   action_fallback PromiseWeb.FallbackController
 
@@ -23,13 +22,15 @@ defmodule PromiseWeb.GoalController do
     user =
       conn.assigns.current_user
       |> Goals.preload_goals()
+
     goals = user.goals
     render(conn, :index, goals: goals)
   end
 
   def index_public(conn, params) do
     user = conn.assigns.current_user
-    with  {:ok, {goals, meta}}  <- Goals.list_goals_for_user(user, params) do
+
+    with {:ok, {goals, meta}} <- Goals.list_goals_for_user(user, params) do
       render(conn, :index, goals: goals, total_count: meta.total_count)
     end
   end

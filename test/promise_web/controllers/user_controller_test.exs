@@ -34,13 +34,14 @@ defmodule PromiseWeb.UserControllerTest do
       conn = get(conn, ~p"/api/profile")
       assert response(conn, 401)
 
-      conn = conn
+      conn =
+        conn
         |> auth_user(@create_attrs)
         |> get(~p"/api/profile")
 
       assert %{
                "id" => ^id,
-               "email" => "some@email",
+               "email" => "some@email"
              } = json_response(conn, 200)["data"]
     end
 
@@ -86,21 +87,21 @@ defmodule PromiseWeb.UserControllerTest do
     end
 
     test "found user by first_name", %{conn: conn} do
-        # User 1
-        user_fixture(first_name: "Name-one")
-        # User 2
-        user_fixture(first_name: "Name-two")
-        # User 3 -- Target
-        name = "Name-three"
-        search_user = user_fixture(first_name: name)
-        search_user_id = search_user.id
+      # User 1
+      user_fixture(first_name: "Name-one")
+      # User 2
+      user_fixture(first_name: "Name-two")
+      # User 3 -- Target
+      name = "Name-three"
+      search_user = user_fixture(first_name: name)
+      search_user_id = search_user.id
 
-        # Test
-        conn = get(conn, ~p"/api/users", name: name)
+      # Test
+      conn = get(conn, ~p"/api/users", name: name)
 
-        response = json_response(conn, 200)
+      response = json_response(conn, 200)
 
-        assert %{"id" => ^search_user_id} = List.first(response["data"])
+      assert %{"id" => ^search_user_id} = List.first(response["data"])
     end
 
     test "found user by last_name", %{conn: conn} do
