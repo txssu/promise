@@ -22,11 +22,13 @@ defmodule Promise.GoalsFixtures do
   @doc """
   Generate a join.
   """
-  def join_fixture(attrs \\ %{}) do
-    {:ok, join} =
-      attrs
-      |> Enum.into(%{})
-      |> Promise.Goals.create_join()
+  def join_fixture(user, goal, attrs \\ %{}) do
+    attrs = Enum.into(attrs, %{
+      deadline: ~U[2050-01-01 00:00:00.00Z],
+      is_public: true
+    })
+
+    {:ok, join} = Promise.Goals.create_join(user, goal, attrs)
 
     join
   end

@@ -15,4 +15,8 @@ defmodule Promise.Setups do
   def create_post(%{goal: goal}) do
     %{post: post_fixture(goal)}
   end
+
+  def create_join(%{user: user, goal: goal}) do
+    %{join: join_fixture(user, goal)}
+  end
 end
