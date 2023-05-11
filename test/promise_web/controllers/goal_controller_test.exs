@@ -3,7 +3,7 @@ defmodule PromiseWeb.GoalControllerTest do
 
   import Promise.AccountsFixtures
   import Promise.GoalsFixtures
-  import Promise.AuthHelper
+  import Promise.Setups
 
   alias Promise.Goals.Goal
 
@@ -129,10 +129,5 @@ defmodule PromiseWeb.GoalControllerTest do
         get(conn, ~p"/api/goals/#{goal}")
       end
     end
-  end
-
-  defp create_goal(%{user: user}) do
-    goal = goal_fixture(user)
-    %{goal: goal}
   end
 end

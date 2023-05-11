@@ -2,7 +2,7 @@ defmodule PromiseWeb.UserControllerTest do
   use PromiseWeb.ConnCase
 
   import Promise.AccountsFixtures
-  import Promise.AuthHelper
+  import Promise.Setups
 
   @create_attrs %{
     first_name: "some-first-name",

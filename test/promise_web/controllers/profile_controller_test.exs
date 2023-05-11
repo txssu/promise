@@ -1,4 +1,4 @@
-defmodule PromiseWeb.UserControllerTest do
+defmodule PromiseWeb.ProfileControllerTest do
   use PromiseWeb.ConnCase, async: true
 
   import Promise.AccountsFixtures
