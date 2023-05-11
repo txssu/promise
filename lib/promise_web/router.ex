@@ -79,6 +79,7 @@ defmodule PromiseWeb.Router do
 
     get "/goals/:id/join", JoinController, :show
     post "/goals/:id/join", JoinController, :create
+    put "/goals/:id/join", JoinController, :update
     delete "/goals/:id/join", JoinController, :delete
   end
 

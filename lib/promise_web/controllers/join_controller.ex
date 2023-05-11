@@ -40,6 +40,18 @@ defmodule PromiseWeb.JoinController do
     %{current_user: user, goal: goal} = conn.assigns
 
     with {:ok, %Join{} = join} <- Goals.create_join(user, goal, join_params) do
+      conn
+      |> put_status(:created)
+      |> render(:show, join: join)
+    end
+  end
+
+  def update(conn, %{"join" => join_params}) do
+    %{current_user: user, goal: goal} = conn.assigns
+
+    join = Goals.get_user_goal_join!(user, goal)
+
+    with {:ok, %Join{} = join} <- Goals.update_join(join, join_params) do
       render(conn, :show, join: join)
     end
   end
