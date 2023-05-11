@@ -11,4 +11,8 @@ defmodule Promise.Setups do
   def create_goal(%{user: user}) do
     %{goal: goal_fixture(user)}
   end
+
+  def create_post(%{goal: goal}) do
+    %{post: post_fixture(goal)}
+  end
 end

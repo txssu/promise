@@ -46,14 +46,12 @@ defmodule Promise.GoalsFixtures do
   @doc """
   Generate a post.
   """
-  def post_fixture(attrs \\ %{}) do
-    {:ok, post} =
-      attrs
-      |> Enum.into(%{
+  def post_fixture(goal, attrs \\ %{}) do
+      attrs = Enum.into(attrs, %{
         text: "some text"
       })
-      |> Promise.Goals.create_post()
 
+    {:ok, post} = Promise.Goals.create_post(goal, attrs)
     post
   end
 end
