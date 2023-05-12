@@ -25,16 +25,13 @@ defmodule Promise.Goals do
   end
 
   def list_goals_for_user(user, params \\ %{}) do
-    {:ok, user_id} = Ecto.UUID.dump(user.id)
-
     Goal
     |> where([g], g.is_public == true)
-    |> distinct([g], g.id)
-    |> join(:left, [g], j in Join, on: g.id == j.goal_id)
+    |> join(:left, [g], j in Join, on: j.goal_id == g.id and j.user_id == ^user.id)
     |> select([g, j], %{
       g
       | is_joined:
-          fragment("CASE WHEN ? = ? THEN TRUE ELSE FALSE END", j.user_id, ^user_id)
+          fragment("CASE WHEN ? IS NULL THEN false ELSE true END", j.user_id)
     })
     |> Flop.validate_and_run(params)
   end
@@ -71,16 +68,13 @@ defmodule Promise.Goals do
   end
 
   def get_goal_for_user(id, user) do
-    {:ok, user_id} = Ecto.UUID.dump(user.id)
-
     Goal
     |> where([g], g.id == ^id)
-    |> distinct([g], g.id)
-    |> join(:left, [g], j in Join, on: g.id == j.goal_id)
+    |> join(:left, [g], j in Join, on: j.goal_id == g.id and j.user_id == ^user.id)
     |> select([g, j], %{
       g
       | is_joined:
-          fragment("CASE WHEN ? = ? THEN TRUE ELSE FALSE END", j.user_id, ^user_id)
+          fragment("CASE WHEN ? IS NULL THEN false ELSE true END", j.user_id)
     })
     |> Repo.one!()
   end
