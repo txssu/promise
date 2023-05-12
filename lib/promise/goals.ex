@@ -7,6 +7,7 @@ defmodule Promise.Goals do
   alias Promise.Repo
 
   alias Promise.Goals.Goal
+  alias Promise.Goals.Join
 
   @doc """
   Returns the list of goals.
@@ -24,16 +25,18 @@ defmodule Promise.Goals do
   end
 
   def list_goals_for_user(user, params \\ %{}) do
-    flop_response =
-      Goal
-      |> where([g], g.is_public == true)
-      |> preload([g], [:user_joins])
-      |> Flop.validate_and_run(params)
+    {:ok, user_id} = Ecto.UUID.dump(user.id)
 
-    case flop_response do
-      {:ok, {goals, meta}} -> {:ok, {Enum.map(goals, &populate_is_joined(&1, user)), meta}}
-      err -> err
-    end
+    Goal
+    |> where([g], g.is_public == true)
+    |> distinct([g], g.id)
+    |> join(:left, [g], j in Join, on: g.id == j.goal_id)
+    |> select([g, j], %{
+      g
+      | is_joined:
+          fragment("CASE WHEN ? = ? THEN TRUE ELSE FALSE END", j.user_id, ^user_id)
+    })
+    |> Flop.validate_and_run(params)
   end
 
   @doc """
@@ -68,15 +71,18 @@ defmodule Promise.Goals do
   end
 
   def get_goal_for_user(id, user) do
+    {:ok, user_id} = Ecto.UUID.dump(user.id)
+
     Goal
     |> where([g], g.id == ^id)
-    |> preload([g], [:user_joins])
+    |> distinct([g], g.id)
+    |> join(:left, [g], j in Join, on: g.id == j.goal_id)
+    |> select([g, j], %{
+      g
+      | is_joined:
+          fragment("CASE WHEN ? = ? THEN TRUE ELSE FALSE END", j.user_id, ^user_id)
+    })
     |> Repo.one!()
-    |> populate_is_joined(user)
-  end
-
-  defp populate_is_joined(goal, user) do
-    %{goal | is_joined: user in goal.user_joins}
   end
 
   @doc """
@@ -144,8 +150,6 @@ defmodule Promise.Goals do
   def change_goal(%Goal{} = goal, attrs \\ %{}) do
     Goal.changeset(goal, attrs)
   end
-
-  alias Promise.Goals.Join
 
   def load_joins(%Goal{} = goal) do
     Repo.preload(goal, :user_joins)
