@@ -422,6 +422,20 @@ paths:
           description: Post deleted
         default:
           $ref: "#/components/responses/Default"
+  /api/profile/joins:
+    get:
+      tags:
+        - profile
+        - goal_joins
+      summary: User's joins
+      security:
+        - bearerAuth: []
+      parameters:
+        - $ref: '#/components/parameters/offsetParam'
+        - $ref: '#/components/parameters/limitParam'
+      responses:
+        default:
+          $ref: "#/components/responses/Default"
   /api/goals/{goal_id}/joins:
     get:
       tags:

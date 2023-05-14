@@ -57,6 +57,8 @@ defmodule PromiseWeb.Router do
   scope "/api", PromiseWeb do
     pipe_through [:api, :ensure_authorized]
 
+    get "/profile/joins", UserJoinsController, :index
+
     get "/goals/:id/joins", GoalJoinsController, :index
 
     get "/goals/:id/join", GoalJoinsController, :show

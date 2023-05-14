@@ -172,6 +172,12 @@ defmodule Promise.Goals do
     Repo.all(Join)
   end
 
+  def list_user_joins(user, params) do
+    Join
+    |> where([j], j.user_id == ^user.id)
+    |> Flop.validate_and_run(params)
+  end
+
   @doc """
   Gets a single join.
 
