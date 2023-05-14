@@ -1,4 +1,4 @@
-defmodule PromiseWeb.JoinJSON do
+defmodule PromiseWeb.GoalJoinsJSON do
   alias Promise.Goals.Join
 
   @doc """

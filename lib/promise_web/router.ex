@@ -57,12 +57,12 @@ defmodule PromiseWeb.Router do
   scope "/api", PromiseWeb do
     pipe_through [:api, :ensure_authorized]
 
-    get "/goals/:id/joins", JoinController, :index
+    get "/goals/:id/joins", GoalJoinsController, :index
 
-    get "/goals/:id/join", JoinController, :show
-    post "/goals/:id/join", JoinController, :create
-    put "/goals/:id/join", JoinController, :update
-    delete "/goals/:id/join", JoinController, :delete
+    get "/goals/:id/join", GoalJoinsController, :show
+    post "/goals/:id/join", GoalJoinsController, :create
+    put "/goals/:id/join", GoalJoinsController, :update
+    delete "/goals/:id/join", GoalJoinsController, :delete
   end
 
   if Application.compile_env(:promise, :dev_routes) do

@@ -1,4 +1,4 @@
-defmodule PromiseWeb.JoinController do
+defmodule PromiseWeb.GoalJoinsController do
   use PromiseWeb, :controller
 
   alias Promise.Goals

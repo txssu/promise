@@ -1,4 +1,4 @@
-defmodule PromiseWeb.JoinControllerTest do
+defmodule PromiseWeb.GoalJoinsControllerTest do
   use PromiseWeb.ConnCase
 
   import Promise.Setups
