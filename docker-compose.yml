@@ -35,7 +35,7 @@ services:
     restart: unless-stopped
 
   nginx:
-    container_name: promise_ngnix
+    container_name: promise_nginx
     depends_on:
       - app
       - swagger
