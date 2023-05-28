@@ -1,5 +1,6 @@
 services:
   database:
+    container_name: promise_database
     image: postgres:latest
     environment:
       POSTGRES_USER: ${POSTGRES_USER:-postgres}
@@ -11,6 +12,7 @@ services:
     restart: unless-stopped
   
   app:
+    container_name: promise_app
     build:
       context: .
     depends_on:
@@ -24,6 +26,7 @@ services:
     restart: unless-stopped
   
   swagger:
+    container_name: promise_swagger
     image: swaggerapi/swagger-ui
     # ports:
     #   - ${SWAGGERUI_PORT:-4001}:8080
@@ -33,6 +36,7 @@ services:
     restart: unless-stopped
 
   nginx:
+    container_name: promise_ngnix
     depends_on:
       - app
       - swagger
