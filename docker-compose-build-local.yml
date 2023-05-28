@@ -13,7 +13,8 @@ services:
   
   app:
     container_name: promise_app
-    image: ghcr.io/waika28/promise:latest
+    build:
+      context: .
     depends_on:
       - database
     # ports:

@@ -12,7 +12,3 @@ echo "Compile assets..."
 mix assets.deploy > /dev/null
 
 mix release --overwrite
-
-docker compose up -d --remove-orphans --build
-
-docker exec promise_app /app/bin/migrate
