@@ -1,4 +1,4 @@
-openapi: "3.0.1"
+openapi: "3.1.0"
 info:
   title: Promise
   version: "1.0"
@@ -78,6 +78,29 @@ paths:
                 properties:
                   data:
                     $ref: "#/components/schemas/UserResponse"
+        default:
+          $ref: "#/components/responses/Default"
+  /api/users/{id}/goals:
+    get:
+      tags:
+        - users
+      summary: List user's public goals
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            $ref: "#/components/schemas/UUID"
+      responses:
+        "200":
+          description: Goals
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    $ref: "#/components/schemas/GoalResponse"
         default:
           $ref: "#/components/responses/Default"
   /api/profile:

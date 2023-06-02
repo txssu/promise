@@ -20,8 +20,14 @@ defmodule Promise.Goals do
   """
   def list_goals(params \\ %{}) do
     Goal
-    |> where([g], g.is_public == true)
+    |> where([g], g.is_public)
     |> Flop.validate_and_run(params, for: Goal)
+  end
+
+  def list_user_goals(user_id, params \\ %{}) do
+    Goal
+    |> where([g], g.is_public and g.user_id == ^user_id)
+    |> Flop.validate_and_run(params)
   end
 
   def list_goals_for_user(user, params \\ %{}) do
