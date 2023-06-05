@@ -28,6 +28,7 @@ defmodule Promise.Goals.Goal do
     field :title, :string
     field :deadline, :utc_datetime
     field :is_public, :boolean
+    field :done, :boolean, default: false
 
     field :is_joined, :boolean, virtual: true
 
