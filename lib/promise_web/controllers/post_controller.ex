@@ -30,7 +30,13 @@ defmodule PromiseWeb.PostController do
        [key: :post, loader: Loaders.GenLoader, resource: {Goals, :get_post!}]
        when action in [:show, :update, :delete]
 
-  plug PromiseWeb.Plugs.AccessRules, rule: :owner_only, resource_key: :goal, can_be_public: true
+  plug PromiseWeb.Plugs.AccessRules,
+       [rule: :owner_only, resource_key: :goal]
+       when action in [:create, :update, :delete]
+
+  plug PromiseWeb.Plugs.AccessRules,
+       [rule: :owner_only, resource_key: :goal, can_be_public: true]
+       when action in [:index, :show]
 
   action_fallback PromiseWeb.FallbackController
 
