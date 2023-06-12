@@ -17,6 +17,14 @@ defmodule PromiseWeb.SubscriptionController do
 
   action_fallback PromiseWeb.FallbackController
 
+  def index(conn, _params) do
+    %{subject: subject, object: object} = conn.assigns
+
+    Accounts.get_subscription(subject, object)
+
+    send_resp(conn, :ok, "")
+  end
+
   def create(conn, _params) do
     %{subject: subject, object: object} = conn.assigns
 

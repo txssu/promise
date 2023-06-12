@@ -130,6 +130,12 @@ defmodule Promise.Accounts do
 
   alias Promise.Accounts.Subscription
 
+  def get_subscription(subject, object) do
+    Subscription
+    |> where([s], s.subject_id == ^subject.id and s.object_id == ^object.id)
+    |> Repo.one!()
+  end
+
   def subscribe(subject, object) do
     %Subscription{}
     |> Subscription.changeset(%{})
