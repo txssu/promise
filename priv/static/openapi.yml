@@ -104,6 +104,23 @@ paths:
         default:
           $ref: "#/components/responses/Default"
   /api/users/{id}/subscription:
+    get:
+      tags:
+        - "subscription"
+      summary: Get subscription
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            $ref: "#/components/schemas/UUID"
+      responses:
+        "201":
+          description: Successfully subscribed
+        default:
+          $ref: "#/components/responses/Default"
     post:
       tags:
         - "subscription"
