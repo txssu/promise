@@ -1,5 +1,13 @@
 # Promise
 
+This service is now running on two domains:
+[test](https://test.promise.waika28.ru) and
+[production](https://promise.waika28.ru). The documentation is on `/docs`
+[here](https://test.promise.waika28.ru/docs) and
+[here](https://promise.waika28.ru/docs) respectively.
+
+# Developing
+
 To start:
 
 ```bash
