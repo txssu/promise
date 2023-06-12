@@ -28,6 +28,9 @@ defmodule PromiseWeb.Router do
     get "/users/:id/goals", PublicUserGoalsController, :index
     # get "/users/:id/joins", PublicUserJoinsController, :index
 
+    post "/users/:id/subscription", SubscriptionController, :create
+    delete "/users/:id/subscription", SubscriptionController, :delete
+
     get "/profile", ProfileController, :show
     put "/profile", ProfileController, :update
     delete "/profile", ProfileController, :delete

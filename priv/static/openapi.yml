@@ -20,8 +20,8 @@ paths:
           required: true
           schema:
             type: string
-        - $ref: '#/components/parameters/offsetParam'
-        - $ref: '#/components/parameters/limitParam'
+        - $ref: "#/components/parameters/offsetParam"
+        - $ref: "#/components/parameters/limitParam"
       responses:
         "200":
           description: Users data
@@ -101,6 +101,41 @@ paths:
                 properties:
                   data:
                     $ref: "#/components/schemas/GoalResponse"
+        default:
+          $ref: "#/components/responses/Default"
+  /api/users/{id}/subscription:
+    post:
+      tags:
+        - "subscription"
+      summary: Subscribe to user
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            $ref: "#/components/schemas/UUID"
+      responses:
+        "201":
+          description: Successfully subscribed
+        default:
+          $ref: "#/components/responses/Default"
+    delete:
+      tags:
+        - "subscription"
+      summary: Unsubscribe to user
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            $ref: "#/components/schemas/UUID"
+      responses:
+        "204":
+          description: Successfully unsubscribed
         default:
           $ref: "#/components/responses/Default"
   /api/profile:
@@ -228,8 +263,8 @@ paths:
       security:
         - bearerAuth: []
       parameters:
-        - $ref: '#/components/parameters/offsetParam'
-        - $ref: '#/components/parameters/limitParam'
+        - $ref: "#/components/parameters/offsetParam"
+        - $ref: "#/components/parameters/limitParam"
       responses:
         "200":
           description: Goals data
@@ -454,8 +489,8 @@ paths:
       security:
         - bearerAuth: []
       parameters:
-        - $ref: '#/components/parameters/offsetParam'
-        - $ref: '#/components/parameters/limitParam'
+        - $ref: "#/components/parameters/offsetParam"
+        - $ref: "#/components/parameters/limitParam"
       responses:
         default:
           $ref: "#/components/responses/Default"
@@ -472,8 +507,8 @@ paths:
           required: true
           schema:
             $ref: "#/components/schemas/UUID"
-        - $ref: '#/components/parameters/offsetParam'
-        - $ref: '#/components/parameters/limitParam'
+        - $ref: "#/components/parameters/offsetParam"
+        - $ref: "#/components/parameters/limitParam"
       responses:
         default:
           $ref: "#/components/responses/Default"

@@ -127,4 +127,21 @@ defmodule Promise.Accounts do
     )
     |> Flop.validate_and_run(params, for: User)
   end
+
+  alias Promise.Accounts.Subscription
+
+  def subscribe(subject, object) do
+    %Subscription{}
+    |> Subscription.changeset(%{})
+    |> Ecto.Changeset.put_assoc(:subject, subject)
+    |> Ecto.Changeset.put_assoc(:object, object)
+    |> Repo.insert()
+  end
+
+  def unsubscribe(subject, object) do
+    Subscription
+    |> where([s], s.subject_id == ^subject.id and s.object_id == ^object.id)
+    |> Repo.one!()
+    |> Repo.delete()
+  end
 end
