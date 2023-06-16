@@ -31,8 +31,13 @@ defmodule Promise.Goals do
   end
 
   def list_goals_for_user(user, params \\ %{}) do
+    sub_ids = user
+    |> Repo.preload(:subscriptions)
+    |> Map.fetch!(:subscriptions)
+    |> Enum.map(&Map.fetch!(&1, :id))
+
     Goal
-    |> where([g], g.is_public == true)
+    |> where([g], g.user_id in ^sub_ids and g.is_public == true)
     |> join(:left, [g], j in Join, on: j.goal_id == g.id and j.user_id == ^user.id)
     |> select([g, j], %{
       g

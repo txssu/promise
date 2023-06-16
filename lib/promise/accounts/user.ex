@@ -34,7 +34,7 @@ defmodule Promise.Accounts.User do
     has_many :goals, Goal
 
     many_to_many :goal_joins, Goal, join_through: Join
-    many_to_many :subscriptions, User, join_through: Subscription
+    many_to_many :subscriptions, User, join_through: Subscription, join_keys: [subject_id: :id, object_id: :id]
 
     timestamps()
   end
